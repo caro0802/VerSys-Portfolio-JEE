@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
  * Datenbankklasse für einen Benutzer.
  */
 @Entity
-@Table(name = "JTODO_USER")
+@Table(name = "MINIMARKT_USER")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,7 +58,7 @@ public class User implements Serializable {
 
     @ElementCollection
     @CollectionTable(
-            name = "JTODO_USER_GROUP",
+            name = "MINIMARKT_USER_GROUP",
             joinColumns = @JoinColumn(name = "USERNAME")
     )
     @Column(name = "GROUPNAME")
@@ -66,6 +66,13 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Task> tasks = new ArrayList<>();
+    
+    private String name = "";
+    private String anschrift = "";  
+    private String PLZ ="";   
+    private String ort = "";
+    private String telefon = "";
+    private String email = "";
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
@@ -94,6 +101,56 @@ public class User implements Serializable {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public void setName(){
+        this.name = name;
+    }
+    
+    public String getAnschrift(){
+        return anschrift;
+    }
+    
+    public void setAnschrift(){
+        this.anschrift = anschrift;
+    }
+    
+    public String getPLZ(){
+        return PLZ;
+    }
+    
+    public void setPLZ(){
+        this.PLZ = PLZ;
+    }
+    
+    public String getOrt(){
+        return ort;
+    }
+    
+    public void setOrt(){
+        this.ort = ort;
+    }
+    
+    public String getTelefon(){
+        return telefon;
+    }
+    
+    public void setTelefon(){
+        this.telefon = telefon;
+    }
+    
+    public String getEmail(){
+        return email;
+    }
+    
+    public void setEmail(){
+        this.email = email;
+    }
+    
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Passwort setzen und prüfen">
