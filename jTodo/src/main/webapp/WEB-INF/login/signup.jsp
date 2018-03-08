@@ -21,7 +21,7 @@
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/login.css"/>" />
+        <link rel="stylesheet" href="<c:url value="/css/main.css"/>" />
     </jsp:attribute>
 
     <jsp:attribute name="menu">
@@ -82,12 +82,16 @@
                         Postleitzahl und Ort:
                         <span class="required">*</span>
                     </label>
-                    <div class="ort">
-                    <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}">
-                    </div>
-                    <div class="plz">
-                    <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}"> 
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="plz" type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}">
+                            </td>
+                            <td>
+                               <input id="ort" type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}"> 
+                            </td>
+                        </tr>
+                    </table>
              
                     <h2> Kontaktdaten </h2>
                     
