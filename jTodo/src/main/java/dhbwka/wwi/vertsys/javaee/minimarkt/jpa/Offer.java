@@ -1,6 +1,6 @@
 package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
-import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.Preisart;
+
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;

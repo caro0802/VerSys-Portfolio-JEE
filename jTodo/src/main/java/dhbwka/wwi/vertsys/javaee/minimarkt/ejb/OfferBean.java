@@ -62,6 +62,7 @@ public class OfferBean extends EntityBean<Offer, Long>{
         }
         
         return em.createQuery(query).getResultList();
+        
     }
     
 }

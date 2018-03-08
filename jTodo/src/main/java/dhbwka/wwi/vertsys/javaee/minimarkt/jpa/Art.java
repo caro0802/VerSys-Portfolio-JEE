@@ -6,12 +6,12 @@
 package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
 public enum Art {
-    UNBEKANNT, BID, SEARCH;
+    UNBEKANNT,BID, SEARCH;
     
         public String getLabel() {
         switch (this) {
             case UNBEKANNT:
-                return "Offen";
+                return "";
             case BID:
                 return "Bieten";
             case SEARCH:

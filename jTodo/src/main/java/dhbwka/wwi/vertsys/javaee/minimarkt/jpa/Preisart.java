@@ -7,8 +7,22 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.minimarkt.ejb;
+package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
 public enum Preisart {
-    UNBEKANNT, Festpreis, Verhandlungsbasis;
+    UNBEKANNT, FESTPREIS, VERHANDLUNGSBASIS;
+       
+    public String getLabel() {
+        switch (this) {
+            case UNBEKANNT:
+                return "";
+            case FESTPREIS:
+                return "Festpreis";
+            case VERHANDLUNGSBASIS:
+               return "Verhandlungsbasis";
+            default:
+                return this.toString();
+        }
+    }
+    
 }

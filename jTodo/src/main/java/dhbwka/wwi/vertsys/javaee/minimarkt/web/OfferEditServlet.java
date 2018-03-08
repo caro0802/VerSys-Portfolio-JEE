@@ -11,11 +11,11 @@ package dhbwka.wwi.vertsys.javaee.minimarkt.web;
 
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.CategoryBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.OfferBean;
-import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.Preisart;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Offer;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Art;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Preisart;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
