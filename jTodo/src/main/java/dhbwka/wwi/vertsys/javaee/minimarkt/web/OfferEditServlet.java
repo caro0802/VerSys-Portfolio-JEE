@@ -69,6 +69,10 @@ public class OfferEditServlet extends HttpServlet {
             request.setAttribute("offer_form", this.createOfferForm(offer));
         }
 
+        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
+            request.setAttribute("readonly", true);
+        }  
+        
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/app/offer_edit.jsp").forward(request, response);
 
@@ -121,6 +125,10 @@ public class OfferEditServlet extends HttpServlet {
         String offerBeschreibung = request.getParameter("offer_beschreibung");
 
         Offer offer = this.getRequestedOffer(request);
+          
+        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
+            errors.add("Nur der Ersteller hat die Berechtigung!");
+        } 
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
             try {
@@ -187,13 +195,34 @@ public class OfferEditServlet extends HttpServlet {
      */
     private void deleteOffer(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+    
+        List<String> errors = new ArrayList<>();
         // Datensatz löschen
         Offer offer = this.getRequestedOffer(request);
         this.offerBean.delete(offer);
 
         // Zurück zur Übersicht
         response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+        
+        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
+            request.setAttribute("readonly", true);
+        } 
+                // Weiter zur nächsten Seite
+        if (errors.isEmpty()) {
+            // Keine Fehler: Startseite aufrufen
+            response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+        } else {
+            // Fehler: Formuler erneut anzeigen
+            FormValues formValues = new FormValues();
+            formValues.setValues(request.getParameterMap());
+            formValues.setErrors(errors);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("offer_form", formValues);
+
+            response.sendRedirect(request.getRequestURI());
+        }
+    }
     }
 
     /**

@@ -47,7 +47,7 @@
                         <option value="">Keine Kategorie</option>
 
                         <c:forEach items="${categories}" var="category">
-                            <option value="${category.id}" ${offer_form.values["offer_category"][0] == category.id ? 'selected' : ''}>
+                            <option value="${category.id}" ${offer_form.values["offer_category"][0] == category.id ? 'selected' : '' } ${readonly ? 'readonly="readonly"' : ''}>
                                 <c:out value="${category.name}" />
                             </option>
                         </c:forEach>
@@ -61,7 +61,7 @@
                 <div class="side-by-side">
                     <select name="offer_art">
                         <c:forEach items="${arten}" var="art">
-                               <option value="${art}" ${offer_form.values["offer_art"][0] == status ? 'selected' : ''}>
+                               <option value="${art}" ${offer_form.values["offer_art"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
                                <c:out value="${art.label}"/>
                             </option>
                              </c:forEach>
@@ -73,12 +73,12 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="offer_titel" value="${offer_form.values["offer_titel"][0]}">
+                    <input type="text" name="offer_titel" value="${offer_form.values["offer_titel"][0]} ${readonly ? 'readonly="readonly"' : ''}">
                 </div>
                 
                  <label for="offer_beschreibung"> Beschreibung: </label>
                 <div class="side-by-side">
-                    <input type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]}">
+                    <input type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]} ${readonly ? 'readonly="readonly"' : ''}">
                 </div>
                 
                  <label for="offer_preis"> Preis:</label>
@@ -88,14 +88,14 @@
                              <div class="side-by-side">
                              <select name="offer_preisart">
                               <c:forEach items="${preise}" var="art">
-                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == status ? 'selected' : ''}>
+                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
                                <c:out value="${preis.label}"/>
                             </option>
                              </c:forEach>
                              </select>    
                             </td>
                             <td>
-                               <input type="text" name="offer_preis" value="${signup_form.values["offer_preis"][0]}" style="width: 100%"> 
+                               <input type="text" name="offer_preis" value="${offer_form.values["offer_preis"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} style="width: 100%"> 
                             </td>
                         </tr>
                     </table>
@@ -109,7 +109,7 @@
                 
             <label for="offer_erstelldatum"> Angelegt am:</label>
              <div class="side-by-side">
-                    <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]}">
+                    <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]} ">
              </div>
             
             <label for="offer_offer"> Anbieter:</label>

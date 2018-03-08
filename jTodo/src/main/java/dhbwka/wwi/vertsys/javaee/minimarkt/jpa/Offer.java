@@ -138,6 +138,10 @@ public class Offer implements Serializable{
     
     //</editor-fold>
 
+    public Object getCreator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }
 
