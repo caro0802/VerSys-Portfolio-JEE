@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Seite zum Bearbeiten des Users.
  */
-@WebServlet(urlPatterns = "/app/user/*")
+@WebServlet(urlPatterns = "/app/user_edit/")
 public class UserEditServlet extends HttpServlet{
     
     @EJB
