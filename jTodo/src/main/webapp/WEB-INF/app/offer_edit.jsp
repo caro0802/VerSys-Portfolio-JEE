@@ -87,9 +87,9 @@
                             <td>
                              <div class="side-by-side">
                              <select name="offer_preisart">
-                              <c:forEach items="${preise}" var="art">
-                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == preisart ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} >
-                               <c:out value="${preis.label}"/>
+                              <c:forEach items="${preise}" var="preisart">
+                               <option value="${preisart}" ${offer_form.values["offer_preisart"][0] == preisart ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} >
+                               <c:out value="${preisart.label}"/>
                             </option>
                              </c:forEach>
                              </select>    

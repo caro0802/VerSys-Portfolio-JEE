@@ -56,7 +56,8 @@ public class OfferEditServlet extends HttpServlet {
         // Verfügbare Kategorien und Angebotsarten für die Suchfelder ermitteln
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("arten", Art.values());
-
+        request.setAttribute("preise", Preisart.values());
+        
         // Zu bearbeitende Aufgabe einlesen
         HttpSession session = request.getSession();
 
