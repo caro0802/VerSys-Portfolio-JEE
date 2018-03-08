@@ -60,37 +60,42 @@
                 </label>
                 <div class="side-by-side">
                     <select name="offer_art">
-                        <option value="${offer_form.values["offer_art"][0]}"> Bieten </option>
-                        <option value="${offer_form.values["offer_art"][0]}"> Suchen </option>
+                        <c:forEach items="${arten}" var="art">
+                               <option value="${art}" ${offer_form.values["offer_art"][0] == status ? 'selected' : ''}>
+                               <c:out value="${art.label}"/>
+                            </option>
+                             </c:forEach>
                     </select>
                 </div>
 
-                <label for="offer_title">
+                <label for="offer_titel">
                     Bezeichnung:
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="offer_title" value="${offer_form.values["offer_title"][0]}">
+                    <input type="text" name="offer_titel" value="${offer_form.values["offer_titel"][0]}">
                 </div>
                 
-                 <label for="offer_description"> Beschreibung: </label>
+                 <label for="offer_beschreibung"> Beschreibung: </label>
                 <div class="side-by-side">
-                    <input type="text" name="offer_description" value="${offer_form.values["offer_description"][0]}">
+                    <input type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]}">
                 </div>
                 
-                 <label for="offer_price"> Preis:
-                    </label>
+                 <label for="offer_preis"> Preis:</label>
                     <table>
                         <tr>
                             <td>
                              <div class="side-by-side">
-                             <select name="offer_art">
-                             <option value=""> Verhandlungsbasis </option>
-                             <option value=""> Festpreis </option>
+                             <select name="offer_preisart">
+                              <c:forEach items="${preise}" var="art">
+                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == status ? 'selected' : ''}>
+                               <c:out value="${preis.label}"/>
+                            </option>
+                             </c:forEach>
                              </select>    
                             </td>
                             <td>
-                               <input type="text" name="offer_price" value="${signup_form.values["offer_price"][0]}" style="width: 100%"> 
+                               <input type="text" name="offer_preis" value="${signup_form.values["offer_preis"][0]}" style="width: 100%"> 
                             </td>
                         </tr>
                     </table>
@@ -101,6 +106,17 @@
                         Sichern
                     </button>
             </div>
+                
+            <label for="offer_erstelldatum"> Angelegt am:</label>
+             <div class="side-by-side">
+                    <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]}">
+             </div>
+            
+            <label for="offer_offer"> Anbieter:</label>
+             <div class="side-by-side">
+                    <label for="offer_offer" value="${offer_form.values["offer_offer"][0]}">
+             </div>
+            
 
             <%-- Fehlermeldungen --%>
             <c:if test="${!empty offer_form.errors}">
