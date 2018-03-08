@@ -37,6 +37,9 @@ public class UserEditServlet extends HttpServlet{
     @EJB
     UserBean userBean;
     
+    @EJB
+    ValidationBean validationBean;
+    
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -90,9 +93,12 @@ public class UserEditServlet extends HttpServlet{
      */
     private void saveUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Formulareingaben prüfen
+        List<String> errors = new ArrayList<>();
 
         // Formulareingaben prüfen
-        String userUsername = request.getParameter("user_Username");
+        String userUsername = request.getParameter("user_username");
         String userName = request.getParameter("user_name");
         String userAnschrift = request.getParameter("user_anschrift");
         String userPLZ = request.getParameter("user_plz");
@@ -108,7 +114,33 @@ public class UserEditServlet extends HttpServlet{
         user.setPLZ(userPLZ);
         user.setOrt(userOrt);
         user.setTelefon(userTelefon);
-        user.setEmail(userEmail);        
+        user.setEmail(userEmail);  
+        
+        this.validationBean.validate(user, errors);
+
+        // Datensatz speichern
+        if (errors.isEmpty()) {
+            this.userBean.update(user);
+        }
+
+        // Weiter zur nächsten Seite
+        if (errors.isEmpty()) {
+            // Keine Fehler: Startseite aufrufen
+            response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+        } else {
+            // Fehler: Formuler erneut anzeigen
+            FormValues formValues = new FormValues();
+            formValues.setValues(request.getParameterMap());
+            formValues.setErrors(errors);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user_form", formValues);
+
+            response.sendRedirect(request.getRequestURI());
+        }
+        
+        
+        
     }
 
 

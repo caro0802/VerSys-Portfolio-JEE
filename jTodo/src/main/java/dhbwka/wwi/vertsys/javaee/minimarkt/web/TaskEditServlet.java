@@ -176,9 +176,8 @@ public class TaskEditServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Aufgerufen in doPost: Vorhandene Aufgabe löschen
-     *
+    /** 
+    *
      * @param request
      * @param response
      * @throws ServletException
