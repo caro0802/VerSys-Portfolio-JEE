@@ -104,9 +104,7 @@ public class UserEditServlet extends HttpServlet{
         user.setPLZ(userPLZ);
         user.setOrt(userOrt);
         user.setTelefon(userTelefon);
-        user.setEmail(userEmail);
-        
-        
+        user.setEmail(userEmail);        
     }
 
 
@@ -139,6 +137,10 @@ public class UserEditServlet extends HttpServlet{
 
         values.put("user_ort", new String[]{
             user.getOrt()
+        });
+        
+        values.put("user_telefon", new String[]{
+            user.getTelefon()
         });
 
         values.put("user_email", new String[]{
