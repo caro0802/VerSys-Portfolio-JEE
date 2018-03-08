@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet für die Startseite bzw. jede Seite, die eine Liste der Aufgaben
+ * Servlet für die Startseite bzw. jede Seite, die eine Liste der Angebote
  * zeigt.
  */
 @WebServlet(urlPatterns = {"/app/tasks/"})
@@ -49,7 +49,7 @@ public class TaskListServlet extends HttpServlet {
         String searchCategory = request.getParameter("search_category");
         String searchStatus = request.getParameter("search_status");
 
-        // Anzuzeigende Aufgaben suchen
+        // Anzuzeigende Angebote suchen
         Category category = null;
         TaskStatus status = null;
 
