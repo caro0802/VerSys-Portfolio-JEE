@@ -9,7 +9,7 @@
  */
 package dhbwka.wwi.vertsys.javaee.minimarkt.ejb;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.minimarkt.Anzeige;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Anzeige;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
