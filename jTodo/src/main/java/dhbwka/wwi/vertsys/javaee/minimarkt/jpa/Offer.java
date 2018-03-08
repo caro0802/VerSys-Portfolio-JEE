@@ -15,11 +15,11 @@ public class Offer implements Serializable{
     private long id = 0;
     
     @ManyToOne
-    @NotNull(message = "Die Anzeige muss einem Benutzer geordnet werden.")
+    @NotNull(message = "Das Angebot muss einem Benutzer geordnet werden.")
     private User ersteller;
     
     @Column(length = 50)
-    @NotNull(message = "Die Anzeige muss einen Titel haben.")
+    @NotNull(message = "Das Angebot muss einen Titel haben.")
     @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
     private String titel = "";
     

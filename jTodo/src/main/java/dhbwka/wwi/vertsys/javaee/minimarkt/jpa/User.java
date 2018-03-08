@@ -99,8 +99,8 @@ public class User implements Serializable {
     @Column(name = "GROUPNAME")
     List<String> groups = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Task> tasks = new ArrayList<>();
+    @OneToMany(mappedBy = "ersteller", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    List<Offer> offers = new ArrayList<>();
     
  
    
@@ -131,12 +131,12 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Task> getOffers() {
-        return tasks;
+    public List<Offer> getOffers() {
+        return offers;
     }
 
-    public void setOffers(List<Task> offers) {
-        this.tasks = tasks;
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
     
     public String getName(){

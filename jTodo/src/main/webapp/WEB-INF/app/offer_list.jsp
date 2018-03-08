@@ -19,12 +19,12 @@
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/anzeige_list.css"/>" />
+        <link rel="stylesheet" href="<c:url value="/css/offer_list.css"/>" />
     </jsp:attribute>
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/anzeige/new/"/>">Anzeige anlegen</a>
+            <a href="<c:url value="/app/offer/new/"/>">Angebot anlegen</a>
         </div>
 
         <div class="menuitem">
@@ -66,11 +66,11 @@
             </button>
         </form>
 
-        <%-- Gefundene Anzeigen --%>
+        <%-- Gefundene Angebote --%>
         <c:choose>
-            <c:when test="${empty anzeigen}">
+            <c:when test="${empty offers}">
                 <p>
-                    Es wurden keine Anzeigen gefunden. 🐈
+                    Es wurden keine Angebote gefunden. 🐈
                 </p>
             </c:when>
             <c:otherwise>
@@ -88,30 +88,30 @@
                             <th>Datum</th>
                         </tr>
                     </thead>
-                    <c:forEach items="${anzeigen}" var="anzeige">
+                    <c:forEach items="${offers}" var="offer">
                         <tr>
                             <td>
-                                <a href="<c:url value="/app/anzeige/${anzeige.id}/"/>">
-                                    <c:out value="${anzeige.titel}"/>
+                                <a href="<c:url value="/app/offer/${offer.id}/"/>">
+                                    <c:out value="${offer.titel}"/>
                                 </a>
                             </td>
                             <td>
-                                <c:out value="${anzeige.category.name}"/>
+                                <c:out value="${offer.category.name}"/>
                             </td>
                             <td>
-                                <c:out value="${anzeige.ersteller.username}"/>
+                                <c:out value="${offer.ersteller.username}"/>
                             </td>
                             <td>
-                                <c:out value="${anzeige.art.label}"/>
+                                <c:out value="${offer.art.label}"/>
                             </td>
                             <td>
-                                <c:out value="${anzeige.preis}"/>
+                                <c:out value="${offer.preis}"/>
                             </td>
                             <td>
-                                <c:out value="${anzeige.preisart}"/>
+                                <c:out value="${offer.preisart}"/>
                             </td>
                             <td>
-                                <c:out value="${utils.formatDate(anzeige.erstelldatum)}"/>
+                                <c:out value="${utils.formatDate(offer.erstelldatum)}"/>
                             </td>
                         </tr>
                     </c:forEach>
