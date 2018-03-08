@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.jpa;
+package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.ejb.Preisart;
+import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.Preisart;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
