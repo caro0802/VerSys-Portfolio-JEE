@@ -64,7 +64,7 @@
 
         <%-- Gefundene Anzeigen --%>
         <c:choose>
-            <c:when test="${empty tasks}">
+            <c:when test="${empty anzeigen}">
                 <p>
                     Es wurden keine Anzeigen gefunden. 🐈
                 </p>

@@ -9,11 +9,11 @@
  */
 package dhbwka.wwi.vertsys.javaee.minimarkt.web;
 
+import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.AnzeigeBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Anzeige;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Art;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Task;
-import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.TaskStatus;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -34,7 +34,7 @@ public class AnzeigeListServlet extends HttpServlet {
     private CategoryBean categoryBean;
     
     @EJB
-    private TaskBean taskBean;
+    private AnzeigeBean anzeigeBean;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,16 +42,16 @@ public class AnzeigeListServlet extends HttpServlet {
 
         // Verfügbare Kategorien und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.categoryBean.findAllSorted());
-        request.setAttribute("statuses", TaskStatus.values());
+        request.setAttribute("arten", Art.values());
 
         // Suchparameter aus der URL auslesen
         String searchText = request.getParameter("search_text");
         String searchCategory = request.getParameter("search_category");
-        String searchStatus = request.getParameter("search_status");
+        String searchArt = request.getParameter("search_art");
 
-        // Anzuzeigende Aufgaben suchen
+        // Anzuzeigende Anzeigen suchen
         Category category = null;
-        TaskStatus status = null;
+        Art art = null;
 
         if (searchCategory != null) {
             try {
@@ -61,19 +61,19 @@ public class AnzeigeListServlet extends HttpServlet {
             }
         }
 
-        if (searchStatus != null) {
+        if (searchArt != null) {
             try {
-                status = TaskStatus.valueOf(searchStatus);
+                art = Art.valueOf(searchArt);
             } catch (IllegalArgumentException ex) {
-                status = null;
+                art = null;
             }
 
         }
 
-        List<Task> tasks = this.taskBean.search(searchText, category, status);
-        request.setAttribute("tasks", tasks);
+        List<Anzeige> anzeigen = this.anzeigeBean.search(searchText, category, art);
+        request.setAttribute("art", art);
 
         // Anfrage an die JSP weiterleiten
-        request.getRequestDispatcher("/WEB-INF/app/task_list.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/app/anzeige_list.jsp").forward(request, response);
     }
 }
