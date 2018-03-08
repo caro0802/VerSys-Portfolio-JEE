@@ -72,10 +72,6 @@ public class SignUpServlet extends HttpServlet {
         if (password1 != null && password2 != null && !password1.equals(password2)) {
             errors.add("Die beiden Passwörter stimmen nicht überein.");
         }
-   //     if (email != null && ! email.value.includes("@")) {
- 
-       // errors.add("Bitte eine gültige E-Mailadresse eingeben.");
-    //}
         
         // Neuen Benutzer anlegen
         if (errors.isEmpty()) {

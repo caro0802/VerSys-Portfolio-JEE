@@ -28,6 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -55,6 +56,7 @@ public class User implements Serializable {
     @Column(name = "PASSWORD_HASH", length = 64)
     @NotNull(message = "Das Passwort darf nicht leer sein.")
     private String passwordHash;
+    
 
     @ElementCollection
     @CollectionTable(
@@ -67,21 +69,47 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Task> tasks = new ArrayList<>();
     
+    @Column(name = "NAME", length = 64)
+    @Size(min = 5, max = 64, message = "Der Vor- und Nachname muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Vor- und Nachname darf nicht leer sein.")
     private String name = "";
-    private String anschrift = "";  
-    private String PLZ ="";   
+    
+    @Column(name = "ANSCHRIFT", length = 64)
+    @Size(min = 5, max = 64, message = "Die Strasse und Hausnummer muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Strasse und Hausnummer darf nicht leer sein.")
+    private String anschrift = ""; 
+    
+    @Column(name = "PLZ", length = 10)
+    @Size(min = 1, max = 10, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
+    @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
+    private int plz ; 
+    
+    @Column(name = "ORT", length = 64)
+    @Size(min = 5, max = 64, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
+    @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
     private String ort = "";
+    
+    @Column(name = "TELEFON", length = 64)
     private String telefon = "";
+    
+    @Column(name = "EMAIL", length = 64)
+    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
     private String email = "";
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String name, String anschrift, int plz, String ort, String telefon, String email) {
         this.username = username;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
+        this.name = name;
+        this.anschrift = anschrift;
+        this.plz = plz;
+        this.ort = ort;
+        this.telefon = telefon;
+        this.email = email;
     }
     //</editor-fold>
 
@@ -118,12 +146,12 @@ public class User implements Serializable {
         this.anschrift = anschrift;
     }
     
-    public String getPLZ(){
-        return PLZ;
+    public int getPLZ(){
+        return plz;
     }
     
     public void setPLZ(){
-        this.PLZ = PLZ;
+        this.plz = plz;
     }
     
     public String getOrt(){
