@@ -75,7 +75,7 @@
     -->
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>minimarkt</realm-name>
+        <realm-name>minimarkt-app</realm-name>
         
         <form-login-config>
             <form-login-page>/WEB-INF/login/login.jsp</form-login-page>
