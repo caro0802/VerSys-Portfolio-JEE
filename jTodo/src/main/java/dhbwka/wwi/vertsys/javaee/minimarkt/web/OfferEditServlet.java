@@ -205,7 +205,7 @@ public class OfferEditServlet extends HttpServlet {
         response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
         
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
-            request.setAttribute("readonly", true);
+            errors.add("Nur der Ersteller hat die Berechtigung!");
         } 
                 // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
@@ -222,7 +222,6 @@ public class OfferEditServlet extends HttpServlet {
 
             response.sendRedirect(request.getRequestURI());
         }
-    }
     }
 
     /**
@@ -313,6 +312,5 @@ public class OfferEditServlet extends HttpServlet {
         FormValues formValues = new FormValues();
         formValues.setValues(values);
         return formValues;
-    }
-
+ }
 }

@@ -61,7 +61,7 @@
                 <div class="side-by-side">
                     <select name="offer_art">
                         <c:forEach items="${arten}" var="art">
-                               <option value="${art}" ${offer_form.values["offer_art"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
+                               <option value="${art}" ${offer_form.values["offer_art"][0] == art ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
                                <c:out value="${art.label}"/>
                             </option>
                              </c:forEach>
@@ -88,14 +88,14 @@
                              <div class="side-by-side">
                              <select name="offer_preisart">
                               <c:forEach items="${preise}" var="art">
-                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
+                               <option value="${preis}" ${offer_form.values["offer_preisart"][0] == preisart ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''}>
                                <c:out value="${preis.label}"/>
                             </option>
                              </c:forEach>
                              </select>    
                             </td>
                             <td>
-                               <input type="text" name="offer_preis" value="${offer_form.values["offer_preis"][0] == status ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} style="width: 100%"> 
+                               <input type="text" name="offer_preis" style="width: 100%" value="${offer_form.values["offer_preis"][0]} ${readonly ? 'readonly="readonly"' : ''} "> 
                             </td>
                         </tr>
                     </table>
@@ -112,9 +112,9 @@
                     <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]} ">
              </div>
             
-            <label for="offer_offer"> Anbieter:</label>
+            <label for="offer_ersteller"> Anbieter:</label>
              <div class="side-by-side">
-                    <label for="offer_offer" value="${offer_form.values["offer_offer"][0]}">
+                    <label for="offer_ersteller" value="${offer_form.values["offer_ersteller"][0]}">
              </div>
             
 
