@@ -78,11 +78,16 @@
                     </label>
                     <input type="text" name="signup_anschrift" value="${signup_form.values["signup_anschrift"][0]}">
                     
-                       <label for="signup_ort">
+                    <label for="signup_ort">
                         Postleitzahl und Ort:
                         <span class="required">*</span>
                     </label>
-                    <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}"> 
+                    <div class="ort">
+                    <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}">
+                    </div>
+                    <div class="plz">
+                    <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}"> 
+                    </div>
              
                     <h2> Kontaktdaten </h2>
                     
