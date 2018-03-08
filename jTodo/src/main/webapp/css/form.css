@@ -29,6 +29,7 @@ form.stacked .side-by-side > * {
 /* Container für nebeneinander liegende Elemente */
 form.stacked .side-by-side {
     display: flex;
+    width: 100%;
 }
 
 form.stacked .side-by-side > * {
