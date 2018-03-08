@@ -131,11 +131,11 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Task> getAnzeigen() {
+    public List<Task> getOffers() {
         return tasks;
     }
 
-    public void setAnzeigen(List<Task> anzeigen) {
+    public void setOffers(List<Task> offers) {
         this.tasks = tasks;
     }
     

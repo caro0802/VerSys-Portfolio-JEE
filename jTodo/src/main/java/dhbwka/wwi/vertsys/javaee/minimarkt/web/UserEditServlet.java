@@ -92,6 +92,7 @@ public class UserEditServlet extends HttpServlet{
             throws ServletException, IOException {
 
         // Formulareingaben prüfen
+        String userUsername = request.getParameter("user_Username");
         String userName = request.getParameter("user_name");
         String userAnschrift = request.getParameter("user_anschrift");
         String userPLZ = request.getParameter("user_plz");
@@ -101,6 +102,7 @@ public class UserEditServlet extends HttpServlet{
 
         User user = this.userBean.getCurrentUser();
 
+        user.setUsername(userUsername);
         user.setName(userName);
         user.setAnschrift(userAnschrift);
         user.setPLZ(userPLZ);
@@ -123,8 +125,9 @@ public class UserEditServlet extends HttpServlet{
      */
     private FormValues createUserForm(User user) {
         Map<String, String[]> values = new HashMap<>();
+        
 
-        values.put("username", new String[]{
+        values.put("user_username", new String[]{
             user.getUsername()
         });
      

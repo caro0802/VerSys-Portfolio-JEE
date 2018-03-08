@@ -21,7 +21,7 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/anzeige/"/>">Übersicht</a>
+            <a href="<c:url value="/app/offer/"/>">Übersicht</a>
         </div>
     </jsp:attribute>
 
@@ -44,7 +44,7 @@
                    <span class="required">*</span>
                    </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_password" value="${user_form.values["user_password"][0]}" readonly="readonly">
+                    <input type="text" name="user_password" value="*****" readonly="readonly">
                 </div>
                 
                 <label for="user_password1"> 

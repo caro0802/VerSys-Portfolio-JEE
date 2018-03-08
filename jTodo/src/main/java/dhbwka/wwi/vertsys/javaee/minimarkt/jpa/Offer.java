@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Anzeige implements Serializable{
+public class Offer implements Serializable{
     
     @Id
     @GeneratedValue
@@ -46,10 +46,10 @@ public class Anzeige implements Serializable{
     
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     
-    public Anzeige(){   
+    public Offer(){   
     }
     
-    public Anzeige(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, Long preis) {
+    public Offer(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, Long preis) {
         this.ersteller = ersteller;
         this.category = category;
         this.titel = titel;

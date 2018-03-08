@@ -9,9 +9,9 @@
  */
 package dhbwka.wwi.vertsys.javaee.minimarkt.web;
 
-import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.AnzeigeBean;
+import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.OfferBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Anzeige;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Offer;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Art;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Category;
 import java.io.IOException;
@@ -27,14 +27,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet für die Startseite bzw. jede Seite, die eine Liste der Aufgaben
  * zeigt.
  */
-@WebServlet(urlPatterns = {"/app/anzeige/"})
-public class AnzeigeListServlet extends HttpServlet {
+@WebServlet(urlPatterns = {"/app/offer/"})
+public class OfferListServlet extends HttpServlet {
 
     @EJB
     private CategoryBean categoryBean;
     
     @EJB
-    private AnzeigeBean anzeigeBean;
+    private OfferBean offerBean;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +49,7 @@ public class AnzeigeListServlet extends HttpServlet {
         String searchCategory = request.getParameter("search_category");
         String searchArt = request.getParameter("search_art");
 
-        // Anzuzeigende Anzeigen suchen
+        // Anzuzeigende Angebote suchen
         Category category = null;
         Art art = null;
 
@@ -70,10 +70,10 @@ public class AnzeigeListServlet extends HttpServlet {
 
         }
 
-        List<Anzeige> anzeigen = this.anzeigeBean.search(searchText, category, art);
+        List<Offer> offers = this.offerBean.search(searchText, category, art);
         request.setAttribute("art", art);
 
         // Anfrage an die JSP weiterleiten
-        request.getRequestDispatcher("/WEB-INF/app/anzeige_list.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/app/offer_list.jsp").forward(request, response);
     }
 }

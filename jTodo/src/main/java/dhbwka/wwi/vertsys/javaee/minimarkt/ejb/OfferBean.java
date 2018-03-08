@@ -9,7 +9,7 @@
  */
 package dhbwka.wwi.vertsys.javaee.minimarkt.ejb;
 
-import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Anzeige;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Offer;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Art;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Category;
 import java.util.List;
@@ -21,26 +21,26 @@ import javax.persistence.criteria.Root;
 
 @Stateless
 @RolesAllowed("minimarkt-app-user")
-public class AnzeigeBean extends EntityBean<Anzeige, Long>{
-    public AnzeigeBean(){
-        super(Anzeige.class);
+public class OfferBean extends EntityBean<Offer, Long>{
+    public OfferBean(){
+        super(Offer.class);
     }
     
         /**
-     * Suche nach Aufgaben anhand ihrer Bezeichnung, Kategorie und Status.
+     * Suche nach Angeboten anhand ihrer Bezeichnung, Kategorie und Art.
      * 
      * @param search In der Kurzbeschreibung enthaltener Text (optional)
      * @param category Kategorie (optional)
-     * @param art Status (optional)
-     * @return Liste mit den gefundenen Aufgaben
+     * @param art Art (optional)
+     * @return Liste mit den gefundenen Angeboten
      */
-    public List<Anzeige> search(String search, Category category, Art art) {
+    public List<Offer> search(String search, Category category, Art art) {
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         
         // SELECT t FROM Task t
-        CriteriaQuery<Anzeige> query = cb.createQuery(Anzeige.class);
-        Root<Anzeige> from = query.from(Anzeige.class);
+        CriteriaQuery<Offer> query = cb.createQuery(Offer.class);
+        Root<Offer> from = query.from(Offer.class);
         query.select(from);
 
         // ORDER BY dueDate, dueTime
@@ -56,7 +56,7 @@ public class AnzeigeBean extends EntityBean<Anzeige, Long>{
             query.where(cb.equal(from.get("category"), category));
         }
         
-        // WHERE t.status = :status
+        // WHERE t.art = :art
         if (art != null) {
             query.where(cb.equal(from.get("art"), art));
         }
