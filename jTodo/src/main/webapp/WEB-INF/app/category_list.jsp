@@ -63,7 +63,7 @@
                     <div>
                         <div class="margin">
                             <c:forEach items="${categories}" var="category">
-                                <input type="checkbox" name="category" id="${'category-'.concat(category.id)}" value="${category.id}" />
+                                <input id="check" type="checkbox" name="category" id="${'category-'.concat(category.id)}" value="${category.id}" />
                                 <label for="${'category-'.concat(category.id)}">
                                     <c:out value="${category.name}"/>
                                 </label>

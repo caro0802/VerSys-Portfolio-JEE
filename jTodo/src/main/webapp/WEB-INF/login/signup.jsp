@@ -85,10 +85,10 @@
                     <table>
                         <tr>
                             <td>
-                                <input id="plz" type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}">
+                                <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}" style="width: 100%" >
                             </td>
                             <td>
-                               <input id="ort" type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}"> 
+                               <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}" style="width: 100%"> 
                             </td>
                         </tr>
                     </table>

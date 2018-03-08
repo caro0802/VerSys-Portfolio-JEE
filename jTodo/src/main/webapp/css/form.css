@@ -82,7 +82,7 @@ form label .required {
     color: darkred;
 }
 
-input,
+#check
 textarea,
 select {
     border: 1px solid #bebebe;
@@ -90,7 +90,6 @@ select {
     margin: 0;
     outline: none;
     background: white;
-    width: 100%;
 }
 
 textarea {
