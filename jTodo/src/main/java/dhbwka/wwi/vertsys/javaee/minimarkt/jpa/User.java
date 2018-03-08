@@ -80,7 +80,7 @@ public class User implements Serializable {
     @Column(name = "EMAIL", length = 64)
     @Size(min = 5, max = 64, message = "Die Email muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Die Email darf nicht leer sein.")
-    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
+    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein.")
     private String email = ""; 
     
     @Transient
