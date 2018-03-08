@@ -6,5 +6,18 @@
 package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
 public enum Art {
-    UNBEKANNT, Biete, Suche;
+    UNBEKANNT, BID, SEARCH;
+    
+        public String getLabel() {
+        switch (this) {
+            case UNBEKANNT:
+                return "Offen";
+            case BID:
+                return "Bieten";
+            case SEARCH:
+               return "Suchen";
+            default:
+                return this.toString();
+        }
+    }
 }
