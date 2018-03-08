@@ -124,12 +124,17 @@ public class OfferEditServlet extends HttpServlet {
         String offerArt = request.getParameter("offer_art");
         String offerTitel = request.getParameter("offer_titel");
         String offerBeschreibung = request.getParameter("offer_beschreibung");
+        String offerErsteller = request.getParameter("offer_ersteller");
 
         Offer offer = this.getRequestedOffer(request);
           
-        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
-            errors.add("Nur der Ersteller hat die Berechtigung!");
-        } 
+        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername()))
+        {
+            errors.add("Nur der Ersteller hat die Berechtigung!");}
+            else 
+            {
+                    offer.setErsteller(this.userBean.getCurrentUser());}
+        
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
             try {
@@ -161,6 +166,7 @@ public class OfferEditServlet extends HttpServlet {
 
         offer.setTitel(offerTitel);
         offer.setBeschreibung(offerBeschreibung);
+        offer.setPreis((long) Double.parseDouble(offerPreis));
 
         this.validationBean.validate(offer, errors);
 
@@ -208,6 +214,9 @@ public class OfferEditServlet extends HttpServlet {
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
             errors.add("Nur der Ersteller hat die Berechtigung!");
         } 
+            else 
+            {
+                    offer.setErsteller(this.userBean.getCurrentUser());}
                 // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
