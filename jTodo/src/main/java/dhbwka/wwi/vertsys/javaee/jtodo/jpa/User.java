@@ -50,6 +50,39 @@ public class User implements Serializable {
         @Size(min = 6, max = 64, message = "Das Passwort muss zwischen sechs und 64 Zeichen lang sein.")
         public String password = "";
     }
+    
+    @Column(name = "NAME", length = 64)
+    @Size(min = 5, max = 64, message = "Der Vor- und Nachname muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Vor- und Nachname darf nicht leer sein.")
+    private String name = "";
+     
+    @Column(name = "ANSCHRIFT", length = 64)
+    @Size(min = 5, max = 64, message = "Die Strasse und Hausnummer muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Strasse und Hausnummer darf nicht leer sein.")
+    private String anschrift = ""; 
+    
+    @Column(name = "PLZ", length = 10)
+    @Size(min = 1, max = 10, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
+    @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
+    private String plz= "" ;
+    
+    
+    @Column(name = "ORT", length = 64)
+    @Size(min = 5, max = 64, message = "Der Ort  muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Ort darf nicht leer sein.")
+    private String ort = "";
+    
+    @Column(name = "TELEFON", length = 64)
+    @Size(min = 5, max = 64, message = "Die Telefonnummer muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Telefonnummer darf nicht leer sein.")
+    private String telefon = "";
+    
+    @Column(name = "EMAIL", length = 64)
+    @Size(min = 5, max = 64, message = "Die Email muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Email darf nicht leer sein.")
+    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
+    private String email = ""; 
+    
     @Transient
     private final Password password = new Password();
 
@@ -69,48 +102,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     List<Task> tasks = new ArrayList<>();
     
- /*   @Column(name = "NAME", length = 64)
-    @Size(min = 5, max = 64, message = "Der Vor- und Nachname muss zwischen fünf und 64 Zeichen lang sein.")
-    @NotNull(message = "Der Vor- und Nachname darf nicht leer sein.")
-    private String name = "";
-    
-    @Column(name = "ANSCHRIFT", length = 64)
-    @Size(min = 5, max = 64, message = "Die Strasse und Hausnummer muss zwischen fünf und 64 Zeichen lang sein.")
-    @NotNull(message = "Die Strasse und Hausnummer darf nicht leer sein.")
-    private String anschrift = ""; 
-    
-    @Column(name = "PLZ", length = 10)
-    @Size(min = 1, max = 10, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
-    @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
-    private int plz ; 
-    
-    @Column(name = "ORT", length = 64)
-    @Size(min = 5, max = 64, message = "Der Ort  muss zwischen fünf und 64 Zeichen lang sein.")
-    @NotNull(message = "Der Ort darf nicht leer sein.")
-    private String ort = "";
-    
-    @Column(name = "TELEFON", length = 64)
-    @Size(min = 5, max = 64, message = "Die Telefonnummer muss zwischen fünf und 64 Zeichen lang sein.")
-    @NotNull(message = "Die Telefonnummer darf nicht leer sein.")
-    private String telefon = "";
-    
-    @Column(name = "EMAIL", length = 64)
-    @Size(min = 5, max = 64, message = "Die Email muss zwischen fünf und 64 Zeichen lang sein.")
-    @NotNull(message = "Die Email darf nicht leer sein.")
-    @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
-    private String email = "";
-*/
-    String name="";
-    String anschrift=""; 
-    String ort="";
-    int plz=0;
-    String telefon="";
-    String email="";
+ 
+   
+
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
     }
 
-    public User(String username, String password, String name, String anschrift, int plz, String ort, String telefon, String email) {
+    public User(String username, String password, String name, String anschrift, String plz, String ort, String telefon, String email) {
         this.username = username;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
@@ -156,7 +155,7 @@ public class User implements Serializable {
         this.anschrift = anschrift;
     }
     
-    public int getPLZ(){
+    public String getPLZ(){
         return plz;
     }
     
