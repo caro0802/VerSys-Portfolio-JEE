@@ -5,10 +5,12 @@
  */
 package dhbwka.wwi.vertsys.javaee.jtodo.jpa;
 
+import dhbwka.wwi.vertsys.javaee.jtodo.ejb.Preisart;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -25,91 +27,107 @@ public class Anzeige implements Serializable{
     @NotNull(message = "Die Anzeige muss einem Benutzer geordnet werden.")
     private User ersteller;
     
+    @Column(length = 50)
+    @NotNull(message = "Die Anzeige muss einen Titel haben.")
+    @Size(min = 1, max = 50, message = "Die Bezeichnung muss zwischen ein und 50 Zeichen lang sein.")
     private String titel = "";
-    private Date erstelldatum = new Date();
-    private Date onlinebis = new Date();
+    
+    @ManyToOne
+    private Category category;
+    
+    @Enumerated(EnumType.STRING)
+    @NotNull
     private Art art = Art.UNBEKANNT;
+    
+    @NotNull(message = "Das Datum darf nicht leer sein.")
+    private Date erstelldatum = new Date();
     
     @Column(precision=7, scale=2)
     private long preis = 0;
     
-    private String postleitzahl = "";
-    private String ort = "";
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private Preisart preisart = Preisart.UNBEKANNT;
     
-    @OneToMany(mappedBy="fotos")
-    private List<Foto> fotos = new ArrayList<>();
+    @Lob
+    @NotNull
+    private String beschreibung = "";
     
     //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
-    public void setId(long id) {
+   public void setId(long id) {
         this.id = id;
+    }
+
+    public void setErsteller(User ersteller) {
+        this.ersteller = ersteller;
     }
 
     public void setTitel(String titel) {
         this.titel = titel;
     }
 
-    public void setErstelldatum(Date erstelldatum) {
-        this.erstelldatum = erstelldatum;
-    }
-
-    public void setOnlinebis(Date onlinebis) {
-        this.onlinebis = onlinebis;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setArt(Art art) {
         this.art = art;
     }
 
+    public void setErstelldatum(Date erstelldatum) {
+        this.erstelldatum = erstelldatum;
+    }
+
     public void setPreis(long preis) {
         this.preis = preis;
     }
 
-    public void setPostleitzahl(String postleitzahl) {
-        this.postleitzahl = postleitzahl;
+    public void setPreisart(Preisart preisart) {
+        this.preisart = preisart;
     }
 
-    public void setOrt(String ort) {
-        this.ort = ort;
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
     }
-
-    public void setFotos(List<Foto> fotos) {
-        this.fotos = fotos;
-    }
-
+    
+    
     public long getId() {
         return id;
+    }
+
+    public User getErsteller() {
+        return ersteller;
     }
 
     public String getTitel() {
         return titel;
     }
 
-    public Date getErstelldatum() {
-        return erstelldatum;
-    }
-
-    public Date getOnlinebis() {
-        return onlinebis;
+    public Category getCategory() {
+        return category;
     }
 
     public Art getArt() {
         return art;
     }
 
+    public Date getErstelldatum() {
+        return erstelldatum;
+    }
+
     public long getPreis() {
         return preis;
     }
 
-    public String getPostleitzahl() {
-        return postleitzahl;
+    public Preisart getPreisart() {
+        return preisart;
     }
 
-    public String getOrt() {
-        return ort;
+    public String getBeschreibung() {
+        return beschreibung;
     }
-
-    public List<Foto> getFotos() {
-        return fotos;
-    }
+    
     //</editor-fold>
+
+
 }
