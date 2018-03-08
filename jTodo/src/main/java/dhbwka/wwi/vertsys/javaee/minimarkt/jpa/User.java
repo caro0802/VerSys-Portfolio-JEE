@@ -143,7 +143,7 @@ public class User implements Serializable {
         return name;
     }
     
-    public void setName(){
+    public void setName(String name){
         this.name = name;
     }
     
@@ -151,7 +151,7 @@ public class User implements Serializable {
         return anschrift;
     }
     
-    public void setAnschrift(){
+    public void setAnschrift(String anschrift){
         this.anschrift = anschrift;
     }
     
@@ -159,7 +159,7 @@ public class User implements Serializable {
         return plz;
     }
     
-    public void setPLZ(){
+    public void setPLZ(String plz){
         this.plz = plz;
     }
     
@@ -167,7 +167,7 @@ public class User implements Serializable {
         return ort;
     }
     
-    public void setOrt(){
+    public void setOrt(String ort){
         this.ort = ort;
     }
     
@@ -175,7 +175,7 @@ public class User implements Serializable {
         return telefon;
     }
     
-    public void setTelefon(){
+    public void setTelefon(String telefon){
         this.telefon = telefon;
     }
     
@@ -183,7 +183,7 @@ public class User implements Serializable {
         return email;
     }
     
-    public void setEmail(){
+    public void setEmail(String email){
         this.email = email;
     }
     
