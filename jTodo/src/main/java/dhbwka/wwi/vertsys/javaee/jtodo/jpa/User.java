@@ -85,14 +85,18 @@ public class User implements Serializable {
     private int plz ; 
     
     @Column(name = "ORT", length = 64)
-    @Size(min = 5, max = 64, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
-    @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
+    @Size(min = 5, max = 64, message = "Der Ort  muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Der Ort darf nicht leer sein.")
     private String ort = "";
     
     @Column(name = "TELEFON", length = 64)
+    @Size(min = 5, max = 64, message = "Die Telefonnummer muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Telefonnummer darf nicht leer sein.")
     private String telefon = "";
     
     @Column(name = "EMAIL", length = 64)
+    @Size(min = 5, max = 64, message = "Die Email muss zwischen fünf und 64 Zeichen lang sein.")
+    @NotNull(message = "Die Email darf nicht leer sein.")
     @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
     private String email = "";
 
