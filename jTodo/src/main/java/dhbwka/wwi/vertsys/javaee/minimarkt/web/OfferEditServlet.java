@@ -11,6 +11,7 @@ package dhbwka.wwi.vertsys.javaee.minimarkt.web;
 
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.CategoryBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.OfferBean;
+import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.Preisart;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Offer;
@@ -115,9 +116,9 @@ public class OfferEditServlet extends HttpServlet {
         String offerErstelldatum = request.getParameter("offer_erstelldatum");
         String offerPreis = request.getParameter("offer_preis");
         String offerPreisart = request.getParameter("offer_preisart");
-        String offerArt = request.getParameter("task_status");
-        String offerTitel = request.getParameter("task_titel");
-        String offerBeschreibung = request.getParameter("task_beschreibung");
+        String offerArt = request.getParameter("offer_art");
+        String offerTitel = request.getParameter("offer_titel");
+        String offerBeschreibung = request.getParameter("offer_beschreibung");
 
         Offer offer = this.getRequestedOffer(request);
 
@@ -141,6 +142,12 @@ public class OfferEditServlet extends HttpServlet {
             offer.setArt(Art.valueOf(offerArt));
         } catch (IllegalArgumentException ex) {
             errors.add("Die ausgewählte Verkaufsart ist nicht vorhanden.");
+        }
+        
+        try {
+            offer.setPreisart(Preisart.valueOf(offerPreisart));
+        } catch (IllegalArgumentException ex) {
+            errors.add("Die ausgewählte Preisart ist nicht vorhanden.");
         }
 
         offer.setTitel(offerTitel);
@@ -182,7 +189,7 @@ public class OfferEditServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Datensatz löschen
-        Offer offer = this.getRequestedTask(request);
+        Offer offer = this.getRequestedOffer(request);
         this.offerBean.delete(offer);
 
         // Zurück zur Übersicht
@@ -233,41 +240,46 @@ public class OfferEditServlet extends HttpServlet {
      * Formular aus der Entity oder aus einer vorherigen Formulareingabe
      * stammen.
      *
-     * @param task Die zu bearbeitende Aufgabe
+     * @param offer die zu bearbeitende Angebot
      * @return Neues, gefülltes FormValues-Objekt
      */
-    private FormValues createTaskForm(Task task) {
+    private FormValues createOfferForm(Offer offer) {
         Map<String, String[]> values = new HashMap<>();
 
-        values.put("task_owner", new String[]{
-            task.getOwner().getUsername()
+        values.put("offer_ersteller", new String[]{
+            offer.getErsteller().getUsername()
         });
 
-        if (task.getCategory() != null) {
-            values.put("task_category", new String[]{
-                task.getCategory().toString()
+        if (offer.getCategory() != null) {
+            values.put("offer_category", new String[]{
+                offer.getCategory().toString()
             });
         }
 
-        values.put("task_due_date", new String[]{
-            WebUtils.formatDate(task.getDueDate())
+        values.put("offer_erstelldatum", new String[]{
+            WebUtils.formatDate((Date) offer.getErstelldatum())
         });
 
-        values.put("task_due_time", new String[]{
-            WebUtils.formatTime(task.getDueTime())
+        values.put("offer_art", new String[]{
+            offer.getArt().toString()
         });
 
-        values.put("task_status", new String[]{
-            task.getStatus().toString()
+        values.put("offer_titel", new String[]{
+            offer.getTitel()
         });
 
-        values.put("task_short_text", new String[]{
-            task.getShortText()
+        values.put("offer_beschreibung", new String[]{
+            offer.getBeschreibung()
         });
-
-        values.put("task_long_text", new String[]{
-            task.getLongText()
+        
+        values.put("offer_preis", new String[]{
+           Double.toString(offer.getPreis())
         });
+        
+        values.put("offer_preisart", new String[]{
+            offer.getPreisart().toString()
+        });
+        
 
         FormValues formValues = new FormValues();
         formValues.setValues(values);

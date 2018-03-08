@@ -34,7 +34,7 @@ public class Offer implements Serializable{
     private Date erstelldatum = new Date();
     
     @Column(precision=7, scale=2)
-    private long preis = 0;
+    private double preis = 0;
     
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -124,7 +124,7 @@ public class Offer implements Serializable{
         return erstelldatum;
     }
 
-    public long getPreis() {
+    public double getPreis() {
         return preis;
     }
 
