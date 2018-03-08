@@ -67,7 +67,7 @@ public class User implements Serializable {
     List<String> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Task> tasks = new ArrayList<>();
+    List<Anzeige> anzeigen = new ArrayList<>();
     
     @Column(name = "NAME", length = 64)
     @Size(min = 5, max = 64, message = "Der Vor- und Nachname muss zwischen fünf und 64 Zeichen lang sein.")
@@ -126,12 +126,12 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public List<Anzeige> getAnzeigen() {
+        return anzeigen;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setAnzeigen(List<Anzeige> anzeigen) {
+        this.anzeigen = anzeigen;
     }
     
     public String getName(){

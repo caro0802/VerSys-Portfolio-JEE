@@ -53,6 +53,24 @@ public class Anzeige implements Serializable{
     @NotNull
     private String beschreibung = "";
     
+    //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
+    
+    public Anzeige(){   
+    }
+    
+    public Anzeige(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, Long preis) {
+        this.ersteller = ersteller;
+        this.category = category;
+        this.titel = titel;
+        this.beschreibung = beschreibung;
+        this.erstelldatum = erstelldatum;
+        this.art = art;
+        this.preisart = preisart;
+        this.preis = preis;
+        
+    }
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
    public void setId(long id) {
         this.id = id;
