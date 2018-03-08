@@ -29,9 +29,6 @@ public class AnzeigeBean extends EntityBean<Anzeige, Long>{
         /**
      * Suche nach Aufgaben anhand ihrer Bezeichnung, Kategorie und Status.
      * 
-     * Anders als in der Vorlesung behandelt, wird die SELECT-Anfrage hier
-     * mit der CriteriaBuilder-API vollkommen dynamisch erzeugt.
-     * 
      * @param search In der Kurzbeschreibung enthaltener Text (optional)
      * @param category Kategorie (optional)
      * @param art Status (optional)
