@@ -67,9 +67,9 @@ public class User implements Serializable {
     List<String> groups = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Anzeige> anzeigen = new ArrayList<>();
+    List<Task> tasks = new ArrayList<>();
     
-    @Column(name = "NAME", length = 64)
+ /*   @Column(name = "NAME", length = 64)
     @Size(min = 5, max = 64, message = "Der Vor- und Nachname muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Der Vor- und Nachname darf nicht leer sein.")
     private String name = "";
@@ -99,7 +99,13 @@ public class User implements Serializable {
     @NotNull(message = "Die Email darf nicht leer sein.")
     @Pattern(regexp = "^\\w+@\\w+\\..{2,3}(.{2,3})?$", message="Bitte gebe eine gültige Emailaddresse ein")
     private String email = "";
-
+*/
+    String name="";
+    String anschrift=""; 
+    String ort="";
+    int plz=0;
+    String telefon="";
+    String email="";
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
     }
@@ -126,12 +132,12 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Anzeige> getAnzeigen() {
-        return anzeigen;
+    public List<Task> getAnzeigen() {
+        return tasks;
     }
 
     public void setAnzeigen(List<Anzeige> anzeigen) {
-        this.anzeigen = anzeigen;
+        this.tasks = tasks;
     }
     
     public String getName(){
