@@ -7,9 +7,9 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.ejb;
+package dhbwka.wwi.vertsys.javaee.minimarkt.ejb;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.jpa.Anzeige;
+import dhbwka.wwi.vertsys.javaee.jtodo.minimarkt.Anzeige;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
