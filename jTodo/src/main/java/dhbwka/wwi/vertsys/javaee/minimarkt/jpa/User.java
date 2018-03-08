@@ -135,7 +135,7 @@ public class User implements Serializable {
         return tasks;
     }
 
-    public void setAnzeigen(List<Anzeige> anzeigen) {
+    public void setAnzeigen(List<Task> anzeigen) {
         this.tasks = tasks;
     }
     
