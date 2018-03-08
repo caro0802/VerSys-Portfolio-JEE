@@ -36,7 +36,7 @@
                 <%-- Eingabefelder --%>
                 <label for="user_username"> Benutzername:</label>
                 <div class="side-by-side">
-                    <input type="text" name="user_username" value="${task_form.values["user_username"][0]}" readonly="readonly">
+                    <input type="text" name="user_username" value="${user_form.values["user_username"][0]}" readonly="readonly">
                 </div>
                 
                    <label for="user_password"> 
@@ -44,7 +44,7 @@
                    <span class="required">*</span>
                    </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_password" value="${task_form.values["user_password"][0]}" readonly="readonly">
+                    <input type="text" name="user_password" value="${user_form.values["user_password"][0]}" readonly="readonly">
                 </div>
                 
                 <label for="user_password1"> 
@@ -70,7 +70,7 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_name" value="${task_form.values["user_name"][0]}">
+                    <input type="text" name="user_name" value="${user_form.values["user_name"][0]}">
                 </div>
                 
                 <label for="user_anschrift">
@@ -78,7 +78,7 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_anschrift" value="${task_form.values["user_anschrift"][0]}">
+                    <input type="text" name="user_anschrift" value="${user_form.values["user_anschrift"][0]}">
                 </div>
                 
                 <label for="user_ort">
@@ -86,27 +86,27 @@
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_plz" value="${task_form.values["user_plz"][0]}">
-                    <input type="text" name="user_ort" value="${task_form.values["user_ort"][0]}">
+                    <input type="text" name="user_plz" value="${user_form.values["user_plz"][0]}">
+                    <input type="text" name="user_ort" value="${user_form.values["user_ort"][0]}">
                 </div>
 
                 <h2> Kontaktdaten </h2>
                 
                 <label for="user_telefon">
-                    Straße und Hausnummer: 
+                    Telefon: 
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_telefon" value="${task_form.values["user_telefon"][0]}">
+                    <input type="text" name="user_telefon" value="${user_form.values["user_telefon"][0]}">
                 </div>
                 
                 
                 <label for="user_email">
-                    Straße und Hausnummer: 
+                    Email: 
                     <span class="required">*</span>
                 </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_email" value="${task_form.values["user_email"][0]}">
+                    <input type="text" name="user_email" value="${user_form.values["user_email"][0]}">
                 </div>
                 
                 <%-- Button zum Abschicken --%>
@@ -119,9 +119,9 @@
             </div>
 
             <%-- Fehlermeldungen --%>
-            <c:if test="${!empty task_form.errors}">
+            <c:if test="${!empty user_form.errors}">
                 <ul class="errors">
-                    <c:forEach items="${task_form.errors}" var="error">
+                    <c:forEach items="${user_form.errors}" var="error">
                         <li>${error}</li>
                     </c:forEach>
                 </ul>

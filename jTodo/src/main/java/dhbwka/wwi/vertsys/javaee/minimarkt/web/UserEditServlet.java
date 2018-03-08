@@ -11,6 +11,7 @@ package dhbwka.wwi.vertsys.javaee.minimarkt.web;
 
 
 import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.UserBean;
+import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.User;
 import java.io.IOException;
 import java.sql.Date;
@@ -35,6 +36,7 @@ public class UserEditServlet extends HttpServlet{
     
     @EJB
     UserBean userBean;
+    
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -122,7 +124,10 @@ public class UserEditServlet extends HttpServlet{
     private FormValues createUserForm(User user) {
         Map<String, String[]> values = new HashMap<>();
 
-
+        values.put("username", new String[]{
+            user.getUsername()
+        });
+     
         values.put("user_name", new String[]{
             user.getName()
         });
