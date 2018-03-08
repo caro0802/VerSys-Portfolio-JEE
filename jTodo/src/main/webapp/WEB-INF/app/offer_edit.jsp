@@ -109,12 +109,12 @@
                 
             <label for="offer_erstelldatum"> Angelegt am:</label>
              <div class="side-by-side">
-                    <label type="text" name="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]}">
+                    <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]}">
              </div>
             
             <label for="offer_offer"> Anbieter:</label>
              <div class="side-by-side">
-                    <label type="text" name="offer_offer" value="${offer_form.values["offer_offer"][0]}">
+                    <label for="offer_offer" value="${offer_form.values["offer_offer"][0]}">
              </div>
             
 
