@@ -78,7 +78,7 @@
                 
                  <label for="offer_beschreibung"> Beschreibung: </label>
                 <div id="Beschreibung" class="side-by-side">
-                    <input type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]} ${readonly ? 'readonly="readonly"' : ''}">
+                    <textarea type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]} ${readonly ? 'readonly="readonly"' : ''}" ></textarea>
                 </div>
                 
                  <label for="offer_preis"> Preis:</label>
@@ -107,15 +107,11 @@
                     </button>
             </div>
                 
-            <label for="zeit"> Angelegt am:</label>
-             <div >
-                    <input for="zeit" name="offer_erstelldatum" value="${zeit} " readonly="readonly">
-             </div>
+            <h3> Angelegt am:</h3>
+            <p> ${offer_form.values["offer_erstelldatum"][0]} </p>
             
-            <label for="ersteller"> Anbieter:</label>
-             <div id="ersteller">
-                    <input for="ersteller" value="${ersteller}" readonly="readonly">
-             </div>
+            <h3> Anbieter:</h3>
+            <p> ${offer_form.values["offer_ersteller"][0]} </p>
             
 
             <%-- Fehlermeldungen --%>
