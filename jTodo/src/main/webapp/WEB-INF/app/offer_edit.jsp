@@ -107,14 +107,14 @@
                     </button>
             </div>
                 
-            <label for="offer_erstelldatum"> Angelegt am:</label>
+            <label for="zeit"> Angelegt am:</label>
              <div class="side-by-side">
-                    <label for="offer_erstelldatum" value="${offer_form.values["offer_erstelldatum"][0]} ">
+                    <input for="zeit" value="${zeit} ">
              </div>
             
-            <label for="offer_ersteller"> Anbieter:</label>
+            <label for="ersteller"> Anbieter:</label>
              <div class="side-by-side">
-                    <label for="offer_ersteller" value="${offer_form.values["offer_ersteller"][0]}">
+                    <input for="ersteller" value="${ersteller}">
              </div>
             
 

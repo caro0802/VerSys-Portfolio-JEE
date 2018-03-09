@@ -49,7 +49,7 @@ public class Offer implements Serializable{
     public Offer(){   
     }
     
-    public Offer(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, Double preis) {
+    public Offer(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, double preis) {
         this.ersteller = ersteller;
         this.category = category;
         this.titel = titel;

@@ -57,11 +57,19 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("arten", Art.values());
         request.setAttribute("preise", Preisart.values());
+        request.setAttribute("ersteller", this.userBean.getCurrentUser());
         
-        // Zu bearbeitende Aufgabe einlesen
+        Date date = new Date(System.currentTimeMillis());
+        Time time = new Time(System.currentTimeMillis());
+        String zeit = (WebUtils.formatDate(date) + " "+ WebUtils.formatTime(time));
+        request.setAttribute("zeit", zeit); 
+        
+        // Zu bearbeitende Anzeige einlesen
         HttpSession session = request.getSession();
 
         Offer offer = this.getRequestedOffer(request);
+        
+        
         request.setAttribute("edit", offer.getId() != 0);
                                 
         if (session.getAttribute("offer_form") == null) {
@@ -69,6 +77,7 @@ public class OfferEditServlet extends HttpServlet {
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
             request.setAttribute("offer_form", this.createOfferForm(offer));
         }
+        
 
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
             request.setAttribute("readonly", true);
