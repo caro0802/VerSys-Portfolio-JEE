@@ -77,7 +77,7 @@
                 </div>
                 
                  <label for="offer_beschreibung"> Beschreibung: </label>
-                <div id="Beschreibung" class="side-by-side">
+                <div class="side-by-side">
                     <textarea type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]} ${readonly ? 'readonly="readonly"' : ''}" ></textarea>
                 </div>
                 
