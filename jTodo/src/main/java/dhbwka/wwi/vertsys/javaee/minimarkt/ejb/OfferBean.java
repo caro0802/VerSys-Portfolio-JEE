@@ -32,7 +32,7 @@ public class OfferBean extends EntityBean<Offer, Long>{
      * @return Alle Aufgaben des Benutzers
      */
         public List<Offer> findByUsername(String username) {
-        return em.createQuery("SELECT t FROM Offer t WHERE t.owner.username = :username ORDER BY erstelldatum")
+        return em.createQuery("SELECT t FROM Offer t WHERE t.ersteller.username = :username ORDER BY t.erstelldatum, t.erstellzeit")
                  .setParameter("username", username)
                  .getResultList();
     }
@@ -49,13 +49,13 @@ public class OfferBean extends EntityBean<Offer, Long>{
         // Hilfsobjekt zum Bauen des Query
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         
-        // SELECT t FROM Task t
+        // SELECT t FROM Offer t
         CriteriaQuery<Offer> query = cb.createQuery(Offer.class);
         Root<Offer> from = query.from(Offer.class);
         query.select(from);
 
         // ORDER BY erstelldatum
-       query.orderBy(cb.asc(from.get("erstelldatum")));
+       query.orderBy(cb.asc(from.get("erstelldatum")), cb.desc(from.get("erstellzeit")));
         
         // WHERE t.shortText LIKE :search
         if (search != null && !search.trim().isEmpty()) {

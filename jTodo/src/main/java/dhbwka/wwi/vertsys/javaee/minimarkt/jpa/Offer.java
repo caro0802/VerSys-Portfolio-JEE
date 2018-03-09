@@ -49,11 +49,13 @@ public class Offer implements Serializable{
     public Offer(){   
     }
     
-    public Offer(User ersteller, Category category, String titel, String beschreibung, Art art, Preisart preisart, double preis) {
+    public Offer(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Time erstellzeit, Art art, Preisart preisart, double preis) {
         this.ersteller = ersteller;
         this.category = category;
         this.titel = titel;
         this.beschreibung = beschreibung;
+        this.erstelldatum = erstelldatum;
+        this.erstellzeit = erstellzeit;
         this.art = art;
         this.preisart = preisart;
         this.preis = preis;
@@ -61,10 +63,7 @@ public class Offer implements Serializable{
     }
     //</editor-fold>
 
-    public Time getErstellzeit() {
-        return erstellzeit;
-    }
-    
+  
     //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
    public void setId(long id) {
         this.id = id;
@@ -85,7 +84,14 @@ public class Offer implements Serializable{
     public void setArt(Art art) {
         this.art = art;
     }
-    
+   
+    public void setErstelldatum(Date erstelldatum) {
+        this.erstelldatum = erstelldatum;
+    }
+
+    public void setErstellzeit(Time erstellzeit) {
+        this.erstellzeit = erstellzeit;
+    }
     public void setPreis(double preis) {
         this.preis = preis;
     }
@@ -123,6 +129,10 @@ public class Offer implements Serializable{
         return erstelldatum;
     }
 
+    public Time getErstellzeit() {
+        return erstellzeit;
+    }
+    
     public double getPreis() {
         return preis;
     }

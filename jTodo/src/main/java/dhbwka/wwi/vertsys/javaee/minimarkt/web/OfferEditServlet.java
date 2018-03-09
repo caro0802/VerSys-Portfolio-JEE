@@ -75,10 +75,11 @@ public class OfferEditServlet extends HttpServlet {
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
             request.setAttribute("offer_form", this.createOfferForm(offer));
         }
-
-        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
+       
+      if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
             request.setAttribute("readonly", true);
-        }
+        } 
+ 
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/app/offer_edit.jsp").forward(request, response);
@@ -93,8 +94,15 @@ public class OfferEditServlet extends HttpServlet {
         // Angeforderte Aktion ausführen
         request.setCharacterEncoding("utf-8");
 
-        String action = request.getParameter("action");
+        Offer offer = this.getRequestedOffer(request);
+        
+//        if (offer.getErsteller().getUsername() != userBean.getCurrentUser().getUsername()) {
+//            response.sendRedirect(request.getRequestURI());
+//            return;
+//        }
 
+        String action = request.getParameter("action"); 
+        
         if (action == null) {
             action = "";
         }
@@ -103,10 +111,9 @@ public class OfferEditServlet extends HttpServlet {
             case "save":
                 this.saveOffer(request, response);
                 break;
-            //Laut Aufgabenstellung wird kein Delete benötigt
-/*           case "delete":
+            case "delete":
                 this.deleteOffer(request, response);
-                break;*/
+                break;
         }
     }
 
@@ -125,6 +132,8 @@ public class OfferEditServlet extends HttpServlet {
         List<String> errors = new ArrayList<>();
 
         String offerCategory = request.getParameter("offer_category");
+        Date erstelldatum = new Date(System.currentTimeMillis());
+        Time erstellzeit = new Time(System.currentTimeMillis());
         String offerArt = request.getParameter("offer_art");
         String offerTitel = request.getParameter("offer_titel");
         String offerBeschreibung = request.getParameter("offer_beschreibung");
@@ -132,11 +141,6 @@ public class OfferEditServlet extends HttpServlet {
         String offerPreis = request.getParameter("offer_preis");
 
         Offer offer = this.getRequestedOffer(request);
-        //User offerErsteller = this.userBean.getCurrentUser();
-
-        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
-            errors.add("Nur der Ersteller hat die Berechtigung!");
-        }
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
             try {
@@ -144,6 +148,22 @@ public class OfferEditServlet extends HttpServlet {
             } catch (NumberFormatException ex) {
                 // Ungültige oder keine ID mitgegeben
             }
+        }
+        
+        if(erstelldatum !=null)
+        { offer.setErstelldatum(erstelldatum);    
+        }
+        else
+        {
+            errors.add("Das Datum muss dem Format: dd.mm.yyyy entsprechen.");
+        }
+        
+          if(erstellzeit !=null)
+        { offer.setErstellzeit(erstellzeit);    
+        }
+        else
+        {
+            errors.add("Das Format der Zeit ist nicht korrekt.");
         }
 
         try {
@@ -170,15 +190,6 @@ public class OfferEditServlet extends HttpServlet {
         }
         offer.setPreis(preis);
 
-        //offer.setErsteller(this.userBean.getCurrentUser());
-//        System.out.println(offerCategory);
-//        System.out.println(offerArt);
-//        System.out.println(offerTitel);
-//        System.out.println(offerBeschreibung);
-//        System.out.println(offerPreis);
-//        System.out.println(offerPreisart);
-//        System.out.println(offerErsteller);
-//        System.out.println(offerErstelldatum);
         this.validationBean.validate(offer, errors);
 
         // Datensatz speichern
@@ -296,6 +307,19 @@ public class OfferEditServlet extends HttpServlet {
         values.put("offer_ersteller", new String[]{
             offer.getErsteller().getUsername(), offer.getErsteller().getAnschrift(), offer.getErsteller().getPLZ(), offer.getErsteller().getOrt()
         });
+        
+//       String readonly;
+//       if(offer.getErsteller().getUsername() != userBean.getCurrentUser().getUsername())
+//       {
+//           readonly= "disabled=\"disabled\"";
+//       }
+//       else
+//       {
+//           readonly="";
+//       }
+//        values.put("offer_readonly", new String[]{
+//                readonly
+//            });
 
         if (offer.getCategory() != null) {
             values.put("offer_category", new String[]{
