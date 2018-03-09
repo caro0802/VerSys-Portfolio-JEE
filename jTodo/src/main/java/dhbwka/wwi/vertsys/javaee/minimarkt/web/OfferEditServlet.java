@@ -60,7 +60,7 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("preise", Preisart.values());
         
         User user = this.userBean.getCurrentUser();
-        String ersteller = (user.getName() + " " + user.getAnschrift() + " " + user.getPLZ() + " " + user.getOrt());
+        String ersteller = (user.getName() + "\n" + user.getAnschrift() + "\n " + user.getPLZ() + " " + user.getOrt());
         request.setAttribute("ersteller", ersteller);
         
         Date date = new Date(System.currentTimeMillis());
@@ -110,9 +110,10 @@ public class OfferEditServlet extends HttpServlet {
             case "save":
                 this.saveOffer(request, response);
                 break;
-            case "delete":
+             //Laut Aufgabenstellung wird kein Delete benötigt
+/*           case "delete":
                 this.deleteOffer(request, response);
-                break;
+                break;*/
         }
     }
 
@@ -131,22 +132,23 @@ public class OfferEditServlet extends HttpServlet {
         List<String> errors = new ArrayList<>();
 
         String offerCategory = request.getParameter("offer_category");
-        String offerErstelldatum = request.getParameter("offer_erstelldatum");
-        String offerPreis = request.getParameter("offer_preis");
-        String offerPreisart = request.getParameter("offer_preisart");
         String offerArt = request.getParameter("offer_art");
         String offerTitel = request.getParameter("offer_titel");
         String offerBeschreibung = request.getParameter("offer_beschreibung");
-        String offerErsteller = request.getParameter("offer_ersteller");
-
+        String offerPreisart = request.getParameter("offer_preisart");
+        String offerPreis = request.getParameter("offer_preis");
+        String offerErstelldatum = request.getParameter("offer_erstelldatum");
+    
+        
+ 
         Offer offer = this.getRequestedOffer(request);
-          
+        //User offerErsteller = this.userBean.getCurrentUser();
+        
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername()))
         {
-            errors.add("Nur der Ersteller hat die Berechtigung!");}
+            errors.add("Nur der Ersteller hat die Berechtigung!");
+        }
            
-        offer.setErsteller(this.userBean.getCurrentUser());
-        
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
             try {
@@ -155,7 +157,7 @@ public class OfferEditServlet extends HttpServlet {
                 // Ungültige oder keine ID mitgegeben
             }
         }
-
+        
         Date erstelldatum = WebUtils.parseDate(offerErstelldatum);
 
         if (erstelldatum != null) {
@@ -178,10 +180,29 @@ public class OfferEditServlet extends HttpServlet {
 
         offer.setTitel(offerTitel);
         offer.setBeschreibung(offerBeschreibung);
-        offer.setPreis((long) Double.parseDouble(offerPreis));
+        
+        offerPreis = offerPreis.replace(",", ".");
+        double preis = 0.0;
+        try{
+            preis = Double.parseDouble(offerPreis);
+        }catch(Exception e){
+            errors.add("Fehler beim parsen.");
+        }
+        offer.setPreis(preis);
+        
+        //offer.setErsteller(this.userBean.getCurrentUser());
+
+//        System.out.println(offerCategory);
+//        System.out.println(offerArt);
+//        System.out.println(offerTitel);
+//        System.out.println(offerBeschreibung);
+//        System.out.println(offerPreis);
+//        System.out.println(offerPreisart);
+//        System.out.println(offerErsteller);
+//        System.out.println(offerErstelldatum);
 
         this.validationBean.validate(offer, errors);
-
+        
         // Datensatz speichern
         if (errors.isEmpty()) {
             this.offerBean.update(offer);
@@ -190,7 +211,7 @@ public class OfferEditServlet extends HttpServlet {
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/offers"));
         } else {
             // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();
@@ -212,6 +233,8 @@ public class OfferEditServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
+  
+    //Zur Erweiterung noch verhanden, wird hier nicht benötigt
     private void deleteOffer(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
@@ -221,7 +244,7 @@ public class OfferEditServlet extends HttpServlet {
         this.offerBean.delete(offer);
 
         // Zurück zur Übersicht
-        response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+        response.sendRedirect(WebUtils.appUrl(request, "/app/offers/"));
         
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
             errors.add("Nur der Ersteller hat die Berechtigung!");
@@ -230,7 +253,7 @@ public class OfferEditServlet extends HttpServlet {
                 // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/offer/"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/offers"));
         } else {
             // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();
@@ -294,9 +317,9 @@ public class OfferEditServlet extends HttpServlet {
     private FormValues createOfferForm(Offer offer) {
         Map<String, String[]> values = new HashMap<>();
 
-        values.put("offer_ersteller", new String[]{
+     /*   values.put("offer_ersteller", new String[]{
             offer.getErsteller().getUsername()
-        });
+        });*/
 
         if (offer.getCategory() != null) {
             values.put("offer_category", new String[]{

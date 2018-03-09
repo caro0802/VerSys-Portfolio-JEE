@@ -84,7 +84,7 @@ public class Offer implements Serializable{
         this.erstelldatum = erstelldatum;
     }
 
-    public void setPreis(long preis) {
+    public void setPreis(double preis) {
         this.preis = preis;
     }
 

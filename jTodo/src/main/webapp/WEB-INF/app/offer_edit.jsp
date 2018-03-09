@@ -31,7 +31,7 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/offer/"/>">Übersicht</a>
+            <a href="<c:url value="/app/offers"/>">Übersicht</a>
         </div>
     </jsp:attribute>
 
@@ -109,7 +109,7 @@
                 
             <label for="zeit"> Angelegt am:</label>
              <div >
-                    <input for="zeit" value="${zeit} " readonly="readonly">
+                    <input for="zeit" name="offer_erstelldatum" value="${zeit} " readonly="readonly">
              </div>
             
             <label for="ersteller"> Anbieter:</label>
