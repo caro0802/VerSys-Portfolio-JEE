@@ -131,9 +131,8 @@ public class OfferEditServlet extends HttpServlet {
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername()))
         {
             errors.add("Nur der Ersteller hat die Berechtigung!");}
-            else 
-            {
-                    offer.setErsteller(this.userBean.getCurrentUser());}
+           
+        offer.setErsteller(this.userBean.getCurrentUser());
         
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
@@ -214,9 +213,7 @@ public class OfferEditServlet extends HttpServlet {
         if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
             errors.add("Nur der Ersteller hat die Berechtigung!");
         } 
-            else 
-            {
-                    offer.setErsteller(this.userBean.getCurrentUser());}
+            
                 // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
