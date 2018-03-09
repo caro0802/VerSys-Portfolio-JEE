@@ -16,6 +16,7 @@ import dhbwka.wwi.vertsys.javaee.minimarkt.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Offer;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Art;
 import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.Preisart;
+import dhbwka.wwi.vertsys.javaee.minimarkt.jpa.User;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -57,7 +58,10 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("arten", Art.values());
         request.setAttribute("preise", Preisart.values());
-        request.setAttribute("ersteller", this.userBean.getCurrentUser());
+        
+        User user = this.userBean.getCurrentUser();
+        String ersteller = (user.getName() + " " + user.getAnschrift() + " " + user.getPLZ() + " " + user.getOrt());
+        request.setAttribute("ersteller", ersteller);
         
         Date date = new Date(System.currentTimeMillis());
         Time time = new Time(System.currentTimeMillis());
