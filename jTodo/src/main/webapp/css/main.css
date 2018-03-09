@@ -93,7 +93,6 @@ td {
     width: 50%;
     margin: 0%;
     display: inline-flex;
-    height: 30px;
 }
 
 tr {
@@ -106,4 +105,3 @@ tbody {
     width: 100%;
     display: block;
 }
-

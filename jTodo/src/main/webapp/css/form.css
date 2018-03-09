@@ -30,7 +30,6 @@ form.stacked .side-by-side > * {
 form.stacked .side-by-side {
     display: flex;
     width: 100%;
-    height: 30px;
 }
 
 form.stacked .side-by-side > * {
@@ -106,6 +105,3 @@ form .errors {
     color: red;
 }
 
-#Beschreibung {
-    height: 100px;
-}
