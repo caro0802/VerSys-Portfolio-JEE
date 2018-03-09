@@ -58,35 +58,28 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("categories", this.categoryBean.findAllSorted());
         request.setAttribute("arten", Art.values());
         request.setAttribute("preise", Preisart.values());
-        
+
         User user = this.userBean.getCurrentUser();
         String ersteller = (user.getName() + "\n" + user.getAnschrift() + "\n " + user.getPLZ() + " " + user.getOrt());
         request.setAttribute("ersteller", ersteller);
-        
-        Date date = new Date(System.currentTimeMillis());
-        Time time = new Time(System.currentTimeMillis());
-        String zeit = (WebUtils.formatDate(date) + " "+ WebUtils.formatTime(time));
-        request.setAttribute("zeit", zeit); 
-        
+
         // Zu bearbeitende Anzeige einlesen
         HttpSession session = request.getSession();
 
         Offer offer = this.getRequestedOffer(request);
-        
-        
+
         request.setAttribute("edit", offer.getId() != 0);
-                                
+
         if (session.getAttribute("offer_form") == null) {
             // Keine Formulardaten mit fehlerhaften Daten in der Session,
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
             request.setAttribute("offer_form", this.createOfferForm(offer));
         }
-        
 
-        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
+        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
             request.setAttribute("readonly", true);
-        }  
-        
+        }
+
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/app/offer_edit.jsp").forward(request, response);
 
@@ -110,7 +103,7 @@ public class OfferEditServlet extends HttpServlet {
             case "save":
                 this.saveOffer(request, response);
                 break;
-             //Laut Aufgabenstellung wird kein Delete benötigt
+            //Laut Aufgabenstellung wird kein Delete benötigt
 /*           case "delete":
                 this.deleteOffer(request, response);
                 break;*/
@@ -137,18 +130,13 @@ public class OfferEditServlet extends HttpServlet {
         String offerBeschreibung = request.getParameter("offer_beschreibung");
         String offerPreisart = request.getParameter("offer_preisart");
         String offerPreis = request.getParameter("offer_preis");
-        String offerErstelldatum = request.getParameter("offer_erstelldatum");
-    
-        
- 
+
         Offer offer = this.getRequestedOffer(request);
         //User offerErsteller = this.userBean.getCurrentUser();
-        
-        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername()))
-        {
+
+        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
             errors.add("Nur der Ersteller hat die Berechtigung!");
         }
-           
 
         if (offerCategory != null && !offerCategory.trim().isEmpty()) {
             try {
@@ -157,21 +145,13 @@ public class OfferEditServlet extends HttpServlet {
                 // Ungültige oder keine ID mitgegeben
             }
         }
-        
-        Date erstelldatum = WebUtils.parseDate(offerErstelldatum);
-
-        if (erstelldatum != null) {
-            offer.setErstelldatum(erstelldatum);
-        } else {
-            errors.add("Das Datum muss dem Format dd.mm.yyyy entsprechen.");
-        }
 
         try {
             offer.setArt(Art.valueOf(offerArt));
         } catch (IllegalArgumentException ex) {
             errors.add("Die ausgewählte Verkaufsart ist nicht vorhanden.");
         }
-        
+
         try {
             offer.setPreisart(Preisart.valueOf(offerPreisart));
         } catch (IllegalArgumentException ex) {
@@ -180,18 +160,17 @@ public class OfferEditServlet extends HttpServlet {
 
         offer.setTitel(offerTitel);
         offer.setBeschreibung(offerBeschreibung);
-        
+
         offerPreis = offerPreis.replace(",", ".");
         double preis = 0.0;
-        try{
+        try {
             preis = Double.parseDouble(offerPreis);
-        }catch(Exception e){
+        } catch (Exception e) {
             errors.add("Fehler beim parsen.");
         }
         offer.setPreis(preis);
-        
-        //offer.setErsteller(this.userBean.getCurrentUser());
 
+        //offer.setErsteller(this.userBean.getCurrentUser());
 //        System.out.println(offerCategory);
 //        System.out.println(offerArt);
 //        System.out.println(offerTitel);
@@ -200,9 +179,8 @@ public class OfferEditServlet extends HttpServlet {
 //        System.out.println(offerPreisart);
 //        System.out.println(offerErsteller);
 //        System.out.println(offerErstelldatum);
-
         this.validationBean.validate(offer, errors);
-        
+
         // Datensatz speichern
         if (errors.isEmpty()) {
             this.offerBean.update(offer);
@@ -233,11 +211,10 @@ public class OfferEditServlet extends HttpServlet {
      * @throws ServletException
      * @throws IOException
      */
-  
     //Zur Erweiterung noch verhanden, wird hier nicht benötigt
     private void deleteOffer(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+
         List<String> errors = new ArrayList<>();
         // Datensatz löschen
         Offer offer = this.getRequestedOffer(request);
@@ -245,12 +222,12 @@ public class OfferEditServlet extends HttpServlet {
 
         // Zurück zur Übersicht
         response.sendRedirect(WebUtils.appUrl(request, "/app/offers/"));
-        
-        if(!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())){
+
+        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
             errors.add("Nur der Ersteller hat die Berechtigung!");
-        } 
-            
-                // Weiter zur nächsten Seite
+        }
+
+        // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
             response.sendRedirect(WebUtils.appUrl(request, "/app/offers"));
@@ -279,7 +256,6 @@ public class OfferEditServlet extends HttpServlet {
         // Zunächst davon ausgehen, dass ein neuer Satz angelegt werden soll
         Offer offer = new Offer();
         offer.setErsteller(this.userBean.getCurrentUser());
-        offer.setErstelldatum(new Date(System.currentTimeMillis()));
 
         // ID aus der URL herausschneiden
         String offerId = request.getPathInfo();
@@ -317,9 +293,9 @@ public class OfferEditServlet extends HttpServlet {
     private FormValues createOfferForm(Offer offer) {
         Map<String, String[]> values = new HashMap<>();
 
-     /*   values.put("offer_ersteller", new String[]{
-            offer.getErsteller().getUsername()
-        });*/
+        values.put("offer_ersteller", new String[]{
+            offer.getErsteller().getUsername(), offer.getErsteller().getAnschrift()
+        });
 
         if (offer.getCategory() != null) {
             values.put("offer_category", new String[]{
@@ -329,6 +305,10 @@ public class OfferEditServlet extends HttpServlet {
 
         values.put("offer_erstelldatum", new String[]{
             WebUtils.formatDate((Date) offer.getErstelldatum())
+        });
+
+        values.put("offer_erstellzeit", new String[]{
+            WebUtils.formatTime((Time) offer.getErstellzeit())
         });
 
         values.put("offer_art", new String[]{
@@ -342,18 +322,17 @@ public class OfferEditServlet extends HttpServlet {
         values.put("offer_beschreibung", new String[]{
             offer.getBeschreibung()
         });
-        
+
         values.put("offer_preis", new String[]{
-           Double.toString(offer.getPreis())
+            Double.toString(offer.getPreis())
         });
-        
+
         values.put("offer_preisart", new String[]{
             offer.getPreisart().toString()
         });
-        
 
         FormValues formValues = new FormValues();
         formValues.setValues(values);
         return formValues;
- }
+    }
 }

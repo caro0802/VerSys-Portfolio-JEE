@@ -2,6 +2,7 @@ package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,9 @@ public class Offer implements Serializable{
     @NotNull
     private Art art = Art.UNBEKANNT;
 
-    private Date erstelldatum = new Date();
+    private Date erstelldatum = new Date(System.currentTimeMillis());
+    
+    private Time erstellzeit = new Time(System.currentTimeMillis());
     
     @Column(precision=7, scale=2)
     private double preis = 0;
@@ -46,18 +49,21 @@ public class Offer implements Serializable{
     public Offer(){   
     }
     
-    public Offer(User ersteller, Category category, String titel, String beschreibung, Date erstelldatum, Art art, Preisart preisart, double preis) {
+    public Offer(User ersteller, Category category, String titel, String beschreibung, Art art, Preisart preisart, double preis) {
         this.ersteller = ersteller;
         this.category = category;
         this.titel = titel;
         this.beschreibung = beschreibung;
-        this.erstelldatum = erstelldatum;
         this.art = art;
         this.preisart = preisart;
         this.preis = preis;
         
     }
     //</editor-fold>
+
+    public Time getErstellzeit() {
+        return erstellzeit;
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Setter und Getter">
    public void setId(long id) {
@@ -79,11 +85,7 @@ public class Offer implements Serializable{
     public void setArt(Art art) {
         this.art = art;
     }
-
-    public void setErstelldatum(Date erstelldatum) {
-        this.erstelldatum = erstelldatum;
-    }
-
+    
     public void setPreis(double preis) {
         this.preis = preis;
     }

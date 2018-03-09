@@ -108,10 +108,11 @@
             </div>
                 
             <h3> Angelegt am:</h3>
-            <p> ${offer_form.values["offer_erstelldatum"][0]} </p>
+            <p> ${offer_form.values["offer_erstelldatum"][0]} ${offer_form.values["offer_erstellzeit"][0]}</p>
             
             <h3> Anbieter:</h3>
-            <p> ${offer_form.values["offer_ersteller"][0]} </p>
+            <p> ${offer_form.values["offer_ersteller"][0]}  </p>
+            <p> ${offer_form.values["offer_ersteller"][1]}  </p>
             
 
             <%-- Fehlermeldungen --%>
