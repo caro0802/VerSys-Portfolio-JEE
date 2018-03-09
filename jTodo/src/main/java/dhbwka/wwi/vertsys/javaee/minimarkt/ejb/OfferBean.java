@@ -26,6 +26,17 @@ public class OfferBean extends EntityBean<Offer, Long>{
         super(Offer.class);
     }
     
+       /**
+     * Alle Aufgaben eines Benutzers, nach Fälligkeit sortiert zurückliefern.
+     * @param username Benutzername
+     * @return Alle Aufgaben des Benutzers
+     */
+        public List<Offer> findByUsername(String username) {
+        return em.createQuery("SELECT t FROM Offer t WHERE t.owner.username = :username ORDER BY erstelldatum")
+                 .setParameter("username", username)
+                 .getResultList();
+    }
+    
         /**
      * Suche nach Angeboten anhand ihrer Bezeichnung, Kategorie und Art.
      * 
@@ -43,8 +54,8 @@ public class OfferBean extends EntityBean<Offer, Long>{
         Root<Offer> from = query.from(Offer.class);
         query.select(from);
 
-        // ORDER BY dueDate, dueTime
-        query.orderBy(cb.asc(from.get("erstelldatum")));
+        // ORDER BY erstelldatum
+       query.orderBy(cb.asc(from.get("erstelldatum")));
         
         // WHERE t.shortText LIKE :search
         if (search != null && !search.trim().isEmpty()) {
@@ -65,4 +76,6 @@ public class OfferBean extends EntityBean<Offer, Long>{
         
     }
     
+    
+
 }
