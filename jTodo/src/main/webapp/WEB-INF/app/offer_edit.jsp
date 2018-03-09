@@ -108,13 +108,13 @@
             </div>
                 
             <label for="zeit"> Angelegt am:</label>
-             <div class="side-by-side">
-                    <input for="zeit" value="${zeit} ">
+             <div >
+                    <input for="zeit" value="${zeit} " readonly="readonly">
              </div>
             
             <label for="ersteller"> Anbieter:</label>
-             <div class="side-by-side">
-                    <input for="ersteller" value="${ersteller}">
+             <div id="ersteller">
+                    <input for="ersteller" value="${ersteller}" readonly="readonly">
              </div>
             
 
