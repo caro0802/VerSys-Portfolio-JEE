@@ -62,13 +62,13 @@ public class User implements Serializable {
     private String anschrift = ""; 
     
     @Column(name = "PLZ", length = 10)
-    @Size(min = 1, max = 10, message = "Die Postleitzahl muss zwischen einem und 10 Zeichen lang sein.")
+    @Size(min = 5, max = 10, message = "Die Postleitzahl muss zwischen fünf und 10 Zeichen lang sein.")
     @NotNull(message = "Der Postleitzahl darf nicht leer sein.")
     private String plz= "" ;
     
     
     @Column(name = "ORT", length = 64)
-    @Size(min = 5, max = 64, message = "Der Ort  muss zwischen fünf und 64 Zeichen lang sein.")
+    @Size(min = 3, max = 64, message = "Der Ort  muss zwischen drei und 64 Zeichen lang sein.")
     @NotNull(message = "Der Ort darf nicht leer sein.")
     private String ort = "";
     
