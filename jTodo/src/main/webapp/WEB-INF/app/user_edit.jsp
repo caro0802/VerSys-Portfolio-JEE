@@ -44,7 +44,7 @@
                    <span class="required">*</span>
                    </label>
                 <div class="side-by-side">
-                    <input type="text" name="user_password" value="*****" readonly="readonly">
+                    <input type="text" name="user_password" value="******" readonly="readonly">
                 </div>
                 
                 <label for="user_password1"> 
