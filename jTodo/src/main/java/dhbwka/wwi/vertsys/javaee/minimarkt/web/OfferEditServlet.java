@@ -59,9 +59,9 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("arten", Art.values());
         request.setAttribute("preise", Preisart.values());
 
-        User user = this.userBean.getCurrentUser();
-        String ersteller = (user.getName() + "\n" + user.getAnschrift() + "\n " + user.getPLZ() + " " + user.getOrt());
-        request.setAttribute("ersteller", ersteller);
+//        User user = this.userBean.getCurrentUser();
+//        String ersteller = (user.getName() + "\n" + user.getAnschrift() + "\n " + user.getPLZ() + " " + user.getOrt());
+//        request.setAttribute("ersteller", ersteller);
 
         // Zu bearbeitende Anzeige einlesen
         HttpSession session = request.getSession();
@@ -189,7 +189,7 @@ public class OfferEditServlet extends HttpServlet {
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/offers"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/offers/"));
         } else {
             // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();
@@ -294,7 +294,7 @@ public class OfferEditServlet extends HttpServlet {
         Map<String, String[]> values = new HashMap<>();
 
         values.put("offer_ersteller", new String[]{
-            offer.getErsteller().getUsername(), offer.getErsteller().getAnschrift()
+            offer.getErsteller().getUsername(), offer.getErsteller().getAnschrift(), offer.getErsteller().getPLZ(), offer.getErsteller().getOrt()
         });
 
         if (offer.getCategory() != null) {
@@ -304,11 +304,11 @@ public class OfferEditServlet extends HttpServlet {
         }
 
         values.put("offer_erstelldatum", new String[]{
-            WebUtils.formatDate((Date) offer.getErstelldatum())
+            WebUtils.formatDate(offer.getErstelldatum())
         });
 
         values.put("offer_erstellzeit", new String[]{
-            WebUtils.formatTime((Time) offer.getErstellzeit())
+            WebUtils.formatTime(offer.getErstellzeit())
         });
 
         values.put("offer_art", new String[]{

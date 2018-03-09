@@ -113,6 +113,8 @@
             <h3> Anbieter:</h3>
             <p> ${offer_form.values["offer_ersteller"][0]}  </p>
             <p> ${offer_form.values["offer_ersteller"][1]}  </p>
+            <p> ${offer_form.values["offer_ersteller"][2]}  </p>
+            <p> ${offer_form.values["offer_ersteller"][3]}  </p>
             
 
             <%-- Fehlermeldungen --%>

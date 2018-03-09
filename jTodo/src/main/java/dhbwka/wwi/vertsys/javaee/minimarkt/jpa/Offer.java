@@ -3,7 +3,7 @@ package dhbwka.wwi.vertsys.javaee.minimarkt.jpa;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.*;
+import java.sql.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
