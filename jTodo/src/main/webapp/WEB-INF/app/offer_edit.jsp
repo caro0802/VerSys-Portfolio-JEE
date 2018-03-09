@@ -31,7 +31,7 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/offers"/>">Übersicht</a>
+            <a href="<c:url value="/app/offers/"/>">Übersicht</a>
         </div>
     </jsp:attribute>
 
