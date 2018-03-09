@@ -41,7 +41,7 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    List<Task> tasks = new ArrayList<>();
+    List<Offer> offers = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public Category() {
@@ -69,12 +69,12 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public List<Offer> getOffer() {
+        return offers;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setOffer(List<Offer> offers) {
+        this.offers= offers;
     }
     //</editor-fold>
 

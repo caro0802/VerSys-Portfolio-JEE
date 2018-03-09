@@ -29,19 +29,16 @@ public class Offer implements Serializable{
     @Enumerated(EnumType.STRING)
     @NotNull
     private Art art = Art.UNBEKANNT;
-    
-    @NotNull(message = "Das Datum darf nicht leer sein.")
+
     private Date erstelldatum = new Date();
     
     @Column(precision=7, scale=2)
     private double preis = 0;
     
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Preisart preisart = Preisart.UNBEKANNT;
     
     @Lob
-    @NotNull
     private String beschreibung = "";
     
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
