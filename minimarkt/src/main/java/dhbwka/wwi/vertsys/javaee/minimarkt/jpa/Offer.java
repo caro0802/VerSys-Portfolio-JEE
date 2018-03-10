@@ -109,7 +109,6 @@ public class Offer implements Serializable{
         this.beschreibung = beschreibung;
     }
     
-    
     public long getId() {
         return id;
     }

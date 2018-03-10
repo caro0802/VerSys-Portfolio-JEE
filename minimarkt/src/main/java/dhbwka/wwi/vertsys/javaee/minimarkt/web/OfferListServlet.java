@@ -72,7 +72,6 @@ public class OfferListServlet extends HttpServlet {
 
         List<Offer> offers = this.offerBean.search(searchText, category, art);
         request.setAttribute("offers", offers);
-        request.setAttribute("art", art);
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/app/offer_list.jsp").forward(request, response);

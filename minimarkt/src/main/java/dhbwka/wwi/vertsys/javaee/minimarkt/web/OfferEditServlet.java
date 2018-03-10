@@ -59,10 +59,6 @@ public class OfferEditServlet extends HttpServlet {
         request.setAttribute("arten", Art.values());
         request.setAttribute("preise", Preisart.values());
 
-//        User user = this.userBean.getCurrentUser();
-//        String ersteller = (user.getName() + "\n" + user.getAnschrift() + "\n " + user.getPLZ() + " " + user.getOrt());
-//        request.setAttribute("ersteller", ersteller);
-
         // Zu bearbeitende Anzeige einlesen
         HttpSession session = request.getSession();
 
@@ -94,12 +90,7 @@ public class OfferEditServlet extends HttpServlet {
         // Angeforderte Aktion ausführen
         request.setCharacterEncoding("utf-8");
 
-        Offer offer = this.getRequestedOffer(request);
-        
-//        if (offer.getErsteller().getUsername() != userBean.getCurrentUser().getUsername()) {
-//            response.sendRedirect(request.getRequestURI());
-//            return;
-//        }
+        //Offer offer = this.getRequestedOffer(request);
 
         String action = request.getParameter("action"); 
         
@@ -148,6 +139,10 @@ public class OfferEditServlet extends HttpServlet {
             } catch (NumberFormatException ex) {
                 // Ungültige oder keine ID mitgegeben
             }
+        }
+        
+        if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
+            errors.add("Nur der Ersteller hat die Berechtigung!");
         }
         
         if(erstelldatum != null)
@@ -312,19 +307,7 @@ public class OfferEditServlet extends HttpServlet {
         values.put("offer_ersteller", new String[]{
             offer.getErsteller().getUsername(), offer.getErsteller().getAnschrift(), offer.getErsteller().getPLZ(), offer.getErsteller().getOrt()
         });
-        
-//       String readonly;
-//       if(offer.getErsteller().getUsername() != userBean.getCurrentUser().getUsername())
-//       {
-//           readonly= "disabled=\"disabled\"";
-//       }
-//       else
-//       {
-//           readonly="";
-//       }
-//        values.put("offer_readonly", new String[]{
-//                readonly
-//            });
+       
 
         if (offer.getCategory() != null) {
             values.put("offer_category", new String[]{
