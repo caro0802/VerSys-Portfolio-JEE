@@ -81,30 +81,32 @@
                     <textarea type="text" name="offer_beschreibung" value="${offer_form.values["offer_beschreibung"][0]} ${readonly ? 'readonly="readonly"' : ''}" ></textarea>
                 </div>
                 
-                 <label for="offer_preis"> Preis:</label>
-                    <table>
-                        <tr>
-                            <td>
-                             <div class="side-by-side">
-                             <select name="offer_preisart">
-                              <c:forEach items="${preise}" var="preisart">
-                               <option value="${preisart}" ${offer_form.values["offer_preisart"][0] == preisart ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} >
-                               <c:out value="${preisart.label}"/>
-                            </option>
-                             </c:forEach>
-                             </select>    
-                            </td>
-                            <td>
+                 <label for="offer_preis"> 
+                     Preis:               
+                 </label>
+                    <div class="side-by-side">
+                            <select name="offer_preisart">
+                                <c:forEach items="${preise}" var="preisart">
+                                    <option value="${preisart}" ${offer_form.values["offer_preisart"][0] == preisart ? 'selected' : ''} ${readonly ? 'readonly="readonly"' : ''} >
+                                        <c:out value="${preisart.label}"/>
+                                    </option>
+                                </c:forEach>
+                            </select>                     
                                <input type="text" name="offer_preis" style="width: 100%" value="${offer_form.values["offer_preis"][0]} ${readonly ? 'readonly="readonly"' : ''} "> 
-                            </td>
-                        </tr>
-                    </table>
+                    </div>
 
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">
                     <button class="icon-pencil" type="submit" name="action" value="save">
                         Sichern
                     </button>
+                    
+                    <c:if test="${edit}">
+                        <button class="icon-trash" type="submit" name="action" value="delete">
+                            Löschen
+                        </button>
+                    </c:if>
+                </div>
             </div>
                 
             <h3> Angelegt am:</h3>

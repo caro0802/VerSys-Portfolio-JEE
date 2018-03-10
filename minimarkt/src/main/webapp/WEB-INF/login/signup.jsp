@@ -82,16 +82,10 @@
                         Postleitzahl und Ort:
                         <span class="required">*</span>
                     </label>
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}" style="width: 100%" >
-                            </td>
-                            <td>
-                               <input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}" style="width: 100%"> 
-                            </td>
-                        </tr>
-                    </table>
+                    
+                    <div class="side-by-side">
+                        <input type="text" name="signup_plz" value="${signup_form.values["signup_plz"][0]}"><input type="text" name="signup_ort" value="${signup_form.values["signup_ort"][0]}">
+                    </div>
              
                     <h2> Kontaktdaten </h2>
                     

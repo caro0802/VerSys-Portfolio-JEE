@@ -88,20 +88,3 @@ a, a:visited {
 a:hover {
     text-decoration: underline;
 }
-
-td {
-    width: 50%;
-    margin: 0%;
-    display: inline-flex;
-}
-
-tr {
-    width: 100%;
-    display: inline-flex;
-    margin:0%;
-}
-
-tbody {
-    width: 100%;
-    display: block;
-}

@@ -188,6 +188,11 @@ public class OfferEditServlet extends HttpServlet {
         } catch (Exception e) {
             errors.add("Fehler beim parsen.");
         }
+        
+        if (preis < 0.0) {
+            errors.add("Bitte geben Sie einen positiven Betrag ein.");
+        }
+        
         offer.setPreis(preis);
 
         this.validationBean.validate(offer, errors);
@@ -232,10 +237,6 @@ public class OfferEditServlet extends HttpServlet {
         List<String> errors = new ArrayList<>();
         // Datensatz löschen
         Offer offer = this.getRequestedOffer(request);
-        this.offerBean.delete(offer);
-
-        // Zurück zur Übersicht
-        response.sendRedirect(WebUtils.appUrl(request, "/app/offers/"));
 
         if (!this.userBean.getCurrentUser().getUsername().equals(offer.getErsteller().getUsername())) {
             errors.add("Nur der Ersteller hat die Berechtigung!");
@@ -244,6 +245,7 @@ public class OfferEditServlet extends HttpServlet {
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
+            this.offerBean.delete(offer);
             response.sendRedirect(WebUtils.appUrl(request, "/app/offers/"));
         } else {
             // Fehler: Formuler erneut anzeigen
